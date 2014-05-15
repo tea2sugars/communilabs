@@ -350,7 +350,7 @@ settings[alpha_region_footer_second_weight] = '2'
 settings[alpha_region_footer_second_css] = ''
 version = '1.x'
 
-css[global.css.less][name] = Communilab Global Styles
-css[global.css.less][description] = The base style for the Communilab theme.
-css[global.css.less][options][weight] = 10
+css[global.css.less][name] = 'Communilab Global Styles'
+css[global.css.less][description] = 'The base style for the Communilab theme.'
+css[global.css.less][options][weight] = '10'
 settings[alpha_css][global.css.less] = 'global.css.less'
