@@ -3,11 +3,11 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700');
 
 h1 {
-	font-family:	'Roboto', Helvetica, Arial, sans-serif;
+	.fontHeaders;
 }
 
 p {
-	font-family:	'Open Sans', Helvetica, Arial, sans-serif;
+	.fontBody
 }
 
 /*navigation*/
@@ -15,17 +15,20 @@ p {
 	li {
 		margin:0;
 		a {
+			.fontLighter;
+			.fontBody;
 			color: 				white;
 			display: 			inline-block;
 			font-size: 			18px;
 			text-decoration: 	none;
 			padding:23px 20px;			
-			&:hover, &.active {
-				background: @colorTeal;
-			}
-			
-		}
-		
+				&:hover, &.active {
+					background: 	@colorTeal;
+				}
+				&:visited {
+					background: 	none;
+				}	
+		}	
 	}
 }
 
@@ -40,4 +43,15 @@ p {
 
 #zone-footer-wrapper {
 	background:		@colorNavy;
+	color: white;
+	a {
+		color: white;
+		text-decoration: none;
+			&:hover, &.active {
+					text-decoration: underline;
+				}
+			&:visited {
+				text-decoration: none;
+			}
+	}
 }
