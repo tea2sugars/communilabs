@@ -8,7 +8,7 @@
 @colorLocal:			#f8cf03;
 @colorMagenta:			#c73d91;
 @colorTeal:				#00a8b7;
-@colorTealDark:			darken(@colorTeal, 20%);
+@colorTealDark:			darken(@colorTeal, 5%);
 @colorGreyLight:		#e6e7e8;
 @colorGreyDark:			#3d3d3d;
 
@@ -28,6 +28,36 @@
 	font-weight: 400;
 }
 
+/*buttons*/
+.button_small {
+	.fontBody;
+	.fontLighter;
+	.rounded;
+	background:		@colorTeal;
+	border: 		1px solid @colorTealDark;
+	color: 			white;
+	font-style: 	italic;
+	text-shadow: 	none;
+		&:hover {
+			background:	@colorTealDark;
+		}
+}
+
+.button_large {
+	.box_padding;
+	.fontBody;
+	.fontLighter;
+	.rounded;
+	background:		@colorTeal;
+	border: 		1px solid @colorTealDark;
+	color: 			white;
+	font-style: 	italic;
+	text-shadow: 	none;
+		&:hover {
+				background:	@colorTealDark;
+			}
+}
+
 /*box control*/
 .baseline_padding {
 	padding:			10px 0;
@@ -35,6 +65,9 @@
 .baseline_margin {
 	margin:				10px 0;
 }
+.box_padding {
+	padding:			10px;
+} 
 
 /* mq for changing things at breakpoints - so after the area labelled */
 @breakpoint-narrow-plus: ~'(min-width: 768px)';
