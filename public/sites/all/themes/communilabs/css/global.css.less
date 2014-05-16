@@ -2,12 +2,28 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto:400,500,700,500italic,400italic,700italic');
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700');
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
 	.fontHeaders;
 }
 
+h1 {
+	
+}
+
 p {
-	.fontBody
+	.fontBody;
+	font-size:		14px;
+	line-height:	1.4;
+	margin-bottom: 20px;
+}
+
+a:link, a:visited {
+	color: @colorTeal;
+	text-decoration: none;
+	&:hover {
+		color: 				@colorTealDark;
+		text-decoration: 	underline;
+	}
 }
 
 /*navigation*/
@@ -22,8 +38,13 @@ p {
 			font-size: 			18px;
 			text-decoration: 	none;
 			padding:23px 20px;			
-				&:hover, &.active {
+				&:hover {
+					background: 	@colorTealDark;
+					color: 			white;
+				}
+				&.active {
 					background: 	@colorTeal;
+					color: 			white;
 				}
 				&:visited {
 					background: 	none;
@@ -56,17 +77,24 @@ p {
 	}
 }
 
-.comment-links {
-	ul {
-		li {
-			a {
-				.button_small;
-			}
-		}
-	}
+.node-links ul li a {
+			.button_large;
+			
 }
 
-.node-links ul li a {
-		.button_large;
-	}
+.comment-links ul li a {
+	.button_small_grey;
+}
+
+button, input[type="reset"], input[type="submit"], input[type="button"] {
+			.button_small
+}
+
+/*.node-links ul li.comment-add {
+		a {
+			.button_small;
+			}
+}*/
+	 
+
 

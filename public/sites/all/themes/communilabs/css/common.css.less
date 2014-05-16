@@ -10,7 +10,7 @@
 @colorTeal:				#00a8b7;
 @colorTealDark:			darken(@colorTeal, 5%);
 @colorGreyLight:		#e6e7e8;
-@colorGreyDark:			#3d3d3d;
+@colorGreyDark:			darken(@colorGreyLight, 30%);
 
 /*font control*/
 .fontHeaders {
@@ -36,11 +36,31 @@
 	background:		@colorTeal;
 	border: 		1px solid @colorTealDark;
 	color: 			white;
+	font-size: 		14px;
 	font-style: 	italic;
 	text-shadow: 	none;
 		&:hover {
-			background:	@colorTealDark;
+			background:			@colorTealDark;
+			color: 				white;
+			text-decoration: 	none;
 		}
+}
+
+.button_small_grey {
+	.fontBody;
+	.fontLighter;
+	.rounded;
+	background: 	@colorGreyDark;
+	color:			white;
+	border: 		1px solid @colorGreyLight;
+	color: 			white;
+	font-size: 		14px;
+	font-style: 	italic;
+	text-shadow: 	none;
+		&:hover {
+			background: 		@colorGreyLight;
+			text-decoration: 	none;
+			}
 }
 
 .button_large {
@@ -51,11 +71,23 @@
 	background:		@colorTeal;
 	border: 		1px solid @colorTealDark;
 	color: 			white;
+	font-size: 		14px;
 	font-style: 	italic;
 	text-shadow: 	none;
 		&:hover {
-				background:	@colorTealDark;
+				background:			@colorTealDark;
+				color: 				white;
+				text-decoration: 	none;
 			}
+}
+
+.strip_button {
+	background: 	none;
+	border: 		none;
+	font-weight:	400;
+	text-shadow: 	none;
+	border-radius: 	0;
+	color: 			@colorTeal;	
 }
 
 /*box control*/
