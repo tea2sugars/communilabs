@@ -2,29 +2,58 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto:400,500,700,500italic,400italic,700italic');
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700');
 
-h1, h2, h3, h4, h5, h6 {
-	.fontHeaders;
-}
-
-h1 {
-	
-}
-
-p {
+body {
 	.fontBody;
-	font-size:		14px;
-	line-height:	1.4;
-	margin-bottom: 20px;
+		h1, h2, h3, h4, h5, h6 {
+			.fontHeaders;
+			color: 				@colorTealDark;
+		}
+		
+		h1 {
+			font-size: 		30px;
+			line-height:	1.25;
+			margin-bottom: 	20px;
+		}
+		h2, h2.node-title, h2.block-title {
+			font-size:		18px;
+			line-height:	1.111;
+			margin-bottom: 	20px;
+		}
+		
+		h3, h4, h5 {
+			font-size:		16px;
+			line-height:	1.25;
+			margin-bottom: 	20px;
+		}
+		h6 {
+			font-size:		14px;
+			line-height:	1.4;
+			margin-bottom:	20px;
+		}
+		
+		p {
+			font-size:		14px;
+			line-height:	1.4;
+			margin-bottom: 	20px;
+		}
+		
+		a:link, a:visited {
+			color: @colorTealDark;
+			text-decoration: none;
+			&:hover {
+				color: 				@colorTeal;
+				text-decoration: 	underline;
+			}
+		}
+		
+		.breadcrumb {
+			margin: 	20px 0;
+			font-size: 	13px;
+			line-height: 1.54;			
+		}
 }
 
-a:link, a:visited {
-	color: @colorTeal;
-	text-decoration: none;
-	&:hover {
-		color: 				@colorTealDark;
-		text-decoration: 	underline;
-	}
-}
+
 
 /*navigation*/
 .navigation {
@@ -39,8 +68,8 @@ a:link, a:visited {
 			text-decoration: 	none;
 			padding:23px 20px;			
 				&:hover {
-					background: 	@colorTealDark;
-					color: 			white;
+					background: 		@colorTealDark;
+					color: 				white;
 					text-decoration: 	none;
 				}
 				&.active {
@@ -78,6 +107,31 @@ a:link, a:visited {
 	}
 }
 
+article, .field-name-comment-body {
+	margin-bottom: 	20px;
+}
+
+/*Blog*/
+.submitted, .submitted span, .views-field-created, .comment-submitted  {
+	color: 			@colorGreyDark;
+	font-size:		13px;
+	line-height: 	1.54;
+	margin-bottom: 	20px;
+}
+
+.block-wp-blog-latest-posts-block {
+	.item-list ul li {
+		margin:0;
+	}
+}
+
+#comments {
+	h3, .comment-submitted, a {
+		margin-bottom: 10px;
+	}
+}
+
+/*Buttons*/
 .node-links ul li a {
 			.button_large;
 			
