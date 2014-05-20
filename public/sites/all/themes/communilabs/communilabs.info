@@ -354,3 +354,5 @@ css[global.css.less][name] = 'Communilab Global Styles'
 css[global.css.less][description] = 'The base style for the Communilab theme.'
 css[global.css.less][options][weight] = '10'
 settings[alpha_css][global.css.less] = 'global.css.less'
+
+plugins[panels][layouts] = panels/layouts

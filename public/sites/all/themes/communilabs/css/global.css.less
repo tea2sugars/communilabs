@@ -77,6 +77,16 @@ body {
 		}
 }
 
+/*Clear*/
+.clear:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+* html .clear { height: 1%; }
+*:first-child+html .clear { min-height: 1px; }
 
 
 /*navigation*/
@@ -107,7 +117,24 @@ body {
 	}
 }
 
-/*Page elements*/
+/*Form and Buttons*/
+
+/*Buttons*/
+.node-links ul li a {
+			.button_large;
+			
+}
+
+.comment-links ul li a {
+	.button_small_grey;
+}
+
+button, input[type="reset"], input[type="submit"], input[type="button"] {
+			.button_small
+}
+
+
+/*Page Template elements*/
 #zone-branding-wrapper {
 	background:		@colorNavy;
 	.logo-img {
@@ -131,9 +158,17 @@ body {
 	}
 }
 
-article, .field-name-comment-body {
-	margin-bottom: 	20px;
+.panel-panel {
+	margin-bottom: 40px;
 }
+
+.panel-separator {margin-bottom: 20px;}
+
+.center-content {
+	text-align: center;
+}
+
+/*homepage specific elements*/
 
 .bean-quote {
 	background:	 	@colorMagenta;
@@ -158,6 +193,7 @@ article, .field-name-comment-body {
 	}
 }
 
+
 /*Blog*/
 .submitted, .submitted span, .views-field-created, .comment-submitted  {
 	color: 			@colorGreyDark;
@@ -168,7 +204,7 @@ article, .field-name-comment-body {
 
 .block-wp-blog-latest-posts-block {
 	.item-list ul li {
-		margin:0;
+		margin:		0;
 	}
 }
 
@@ -178,26 +214,12 @@ article, .field-name-comment-body {
 	}
 }
 
-/*Buttons*/
-.node-links ul li a {
-			.button_large;
-			
+article, .field-name-comment-body {
+	margin-bottom: 	20px;
 }
 
-.comment-links ul li a {
-	.button_small_grey;
-}
 
-button, input[type="reset"], input[type="submit"], input[type="button"] {
-			.button_small
-}
 
-/*.node-links ul li.comment-add {
-		a {
-			.button_small;
-			}
-}*/
 
-	 
 
 
