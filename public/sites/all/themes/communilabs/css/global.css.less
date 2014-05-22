@@ -6,7 +6,7 @@ body {
 	.fontBody;
 		h1, h2, h3, h4, h5, h6 {
 			.fontHeaders;
-			color: 				@colorTealDark;
+			color: 				@colorPrimary;
 		}
 		
 		h1 {
@@ -60,6 +60,10 @@ body {
 		.large-grey {
 			color: 		@colorGreyDark;
 			font-size: 	16px;			
+		}
+		
+		.blue-text {
+			color:@colorPrimary;
 		}
 		
 		/*Style overides*/
@@ -135,31 +139,31 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 
 
 /*Page Template elements*/
+#section-content {
+	margin-top:		-2px;
+}
+
 #zone-branding-wrapper {
-	background:		@colorNavy;
+	background:		@colorPrimary;
 	.logo-img {
 		.baseline_margin;
-		height:52px;
+		height:		52px;
 	}	
 } 
 
 #zone-footer-wrapper {
-	background:		@colorNavy;
-	color: white;
+	background:		@colorPrimary;
+	color: 			white;
 	a {
-		color: white;
+		color: 		white;
 		text-decoration: none;
 			&:hover, &.active {
-					text-decoration: underline;
-				}
+				text-decoration: underline;
+			}
 			&:visited {
 				text-decoration: none;
 			}
 	}
-}
-
-.panel-panel {
-	margin-bottom: 40px;
 }
 
 .panel-separator {margin-bottom: 20px;}
@@ -168,16 +172,28 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	text-align: center;
 }
 
+#news-ticker {
+	margin-bottom:40px;
+	.wrapper-inside {
+		background: @colorGreyLighter;
+		margin:0 10px;
+		padding:10px 0;
+	}
+	p {
+		margin:0;
+	}
+}
+
 /*homepage specific elements*/
 
 .bean-quote {
-	background:	 	@colorMagenta;
+	background:	 	@colorCyan;
 	color: 			white;
 	text-align: 	center;
-	padding:		2% 7%;
+	padding:		5% 10%;
 		.field-name-field-quote div {
-			.fontSerif;
 			font-size:		22px;
+			font-style: 	italic;
 			line-height:	40px;
 		}
 		.field-name-field-name-of-source div {

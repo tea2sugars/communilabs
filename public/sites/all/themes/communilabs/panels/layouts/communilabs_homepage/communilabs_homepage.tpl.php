@@ -5,12 +5,14 @@
   </div>
 </div>
   <div class="homepage_wrapper clear" id="news-ticker">
+  	<div class="wrapper-inside clear">
   		<div class="panel-panel grid-8">
 	    	<div class="inside"><?php print $content['news-1']; ?></div>
 		</div>
 		<div class="panel-panel grid-4">
 	   		<div class="inside"><?php print $content['news-2']; ?></div>
 		</div>
+  	</div>
   </div>
   <div class="homepage_wrapper clear">
 	  <div class="panel-panel grid-4 center-content">
