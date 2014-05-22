@@ -12,6 +12,8 @@ function communilabs_communilabs_homepage_panels_layouts() {
 	'admin css' => 'communilabs_homepage.css',
     'regions' => array(
       'header' => t('Header'),
+      'news-1' => t('News-1'),
+      'news-2' => t('News-2'),
       '1' => t('1'),
       '2' => t('2'),
       '3' => t('3'),
@@ -21,8 +23,6 @@ function communilabs_communilabs_homepage_panels_layouts() {
       '6' => t('6'),
       '7' => t('7'),
       '8' => t('8'),
-      '9' => t('9'),
-      '10' => t('10'),
       '11' => t('11'),
       '12' => t('12'),
       '13' => t('13'),    
