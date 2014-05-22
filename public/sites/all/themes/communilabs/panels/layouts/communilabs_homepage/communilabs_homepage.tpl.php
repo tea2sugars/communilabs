@@ -1,31 +1,32 @@
 <div class="panel-display omega-grid communilabs_homepage" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
-<div class="clear">
-  <div class="panel-panel grid-12 clear">
+<div class="homepage_image_wrapper clear" id="header-image">
+  <div class="panel-panel grid-12">
     <div class="inside"><?php print $content['header']; ?></div>
-  </div> 		
+  </div> 	
 </div>
 
-<div class="clear" id="news-ticker">
-	<div class="inside">
-		<div class="panel-panel grid-8">
-	    	<div class="inside">
-	    		<?php print $content['news-1']; ?>
-	    	</div>
+<div class="news_wrapper clear">
+	<div class="panel-panel grid-8">
+		<div class="inside">
+			<?php print $content['news-1']; ?>
 		</div>
-		<div class="panel-panel grid-4">
-	   		<div class="inside">
-	   			<?php print $content['news-2']; ?>
-	   		</div>
-	   	</div>
+	</div>
+	<div class="panel-panel grid-4">
+		<div class="inside">
+			<?php print $content['news-2']; ?>
+		</div>
 	</div>
 </div>
+
+
+		
   
   <div class="homepage_wrapper clear">
 	  <div class="panel-panel grid-4 center-content">
 	    <div class="inside"><?php print $content['1']; ?></div>
 	  </div>
-	  <div class="panel-panel grid-4 center-content">
+	  <div class="panel-panel grid-4 center-content panel-border">
 	    <div class="inside"><?php print $content['2']; ?></div>
 	  </div>
 	  <div class="panel-panel grid-4 center-content">
