@@ -229,16 +229,6 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	}
 }
 
-#comments {
-	h3, .comment-submitted, a {
-		margin-bottom: 10px;
-	}
-}
-
-article, .field-name-comment-body {
-	margin-bottom: 	20px;
-}
-
 .view-display-id-block_1 {
 	.views-row {
 		border-bottom: 4px dotted @colorNavy;
@@ -282,6 +272,28 @@ article, .field-name-comment-body {
 		border-radius:0;
 	}
 }
+}
+
+/*comments*/
+
+#comments {
+	article {
+		background: 	@colorTealLighter;
+		margin-bottom: 	20px;
+		padding:		20px;
+			h3, .comment-submitted, a {
+				margin-bottom: 	10px;
+				}
+			.field-name-comment-body {
+				margin-bottom: 	20px;
+			}
+	}
+	form.comment-form {
+		background: 	@colorTealLighter;
+		margin-bottom: 	20px;
+		padding:		20px;
+		
+	}
 }
 
 
