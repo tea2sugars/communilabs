@@ -7,14 +7,19 @@
 </div>
 
 <div class="news_wrapper clear">
-	<div class="panel-panel grid-8">
+	<div class="panel-panel grid-7">
 		<div class="inside">
 			<?php print $content['news-1']; ?>
 		</div>
 	</div>
-	<div class="panel-panel grid-4">
+	<div class="panel-panel grid-3">
 		<div class="inside">
 			<?php print $content['news-2']; ?>
+		</div>
+	</div>
+	<div class="panel-panel grid-2">
+		<div class="inside">
+			<?php print $content['news-3']; ?>
 		</div>
 	</div>
 </div>

@@ -14,6 +14,7 @@ function communilabs_communilabs_homepage_panels_layouts() {
       'header' => t('Header'),
       'news-1' => t('News-1'),
       'news-2' => t('News-2'),
+      'news-3' => t('News-3'),
       '1' => t('1'),
       '2' => t('2'),
       '3' => t('3'),
