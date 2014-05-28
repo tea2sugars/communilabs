@@ -90,6 +90,7 @@ span.follow-link-wrapper a {
 	float:right;
 }
 .follow-links {margin-top:-5px;}
+
 /*Clear*/
 .clear:after {
     content: ".";
@@ -185,19 +186,14 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 }
 
 .news_wrapper {
-	padding:		20px 0; 
-	border-top:		1px solid @colorGreyLight; 
-	border-bottom:	1px solid @colorGreyLight;
-	margin-bottom: 	40px;
+	padding:		20px 0 10px 0; 
+	margin:-20px 10px 40px 10px;
+	background-color: @colorGreyLight;	
 	p {
 		margin-bottom: 	0px;
 	}
-	.grid-4 {
-		margin-top:		10px;
-		@media all and @breakpoint-wide-plus {
-			margin-top:	0;
-		}
-	}
+	.grid-2, .grid-3 {margin:0;}
+
 }
 /*homepage specific elements*/
 
