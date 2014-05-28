@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.5
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 22, 2014 at 06:05 PM
--- Server version: 5.1.44
--- PHP Version: 5.3.2
+-- Generation Time: May 28, 2014 at 12:19 PM
+-- Server version: 5.5.29
+-- PHP Version: 5.4.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -149,7 +150,7 @@ CREATE TABLE `block` (
   PRIMARY KEY (`bid`),
   UNIQUE KEY `tmd` (`theme`,`module`,`delta`),
   KEY `list` (`theme`,`status`,`region`,`weight`,`module`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores block settings, such as region and visibility...' AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores block settings, such as region and visibility...' AUTO_INCREMENT=131 ;
 
 -- --------------------------------------------------------
 
@@ -609,7 +610,7 @@ CREATE TABLE `comment` (
   KEY `comment_uid` (`uid`),
   KEY `comment_nid_language` (`nid`,`language`),
   KEY `comment_created` (`created`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores comments and associated data.' AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores comments and associated data.' AUTO_INCREMENT=58 ;
 
 -- --------------------------------------------------------
 
@@ -1459,7 +1460,7 @@ CREATE TABLE `file_managed` (
   KEY `uid` (`uid`),
   KEY `status` (`status`),
   KEY `timestamp` (`timestamp`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores information for uploaded files.' AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores information for uploaded files.' AUTO_INCREMENT=45 ;
 
 -- --------------------------------------------------------
 
@@ -1528,7 +1529,7 @@ CREATE TABLE `flood` (
   PRIMARY KEY (`fid`),
   KEY `allow` (`event`,`identifier`,`timestamp`),
   KEY `purge` (`expiration`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...' AUTO_INCREMENT=78 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...' AUTO_INCREMENT=93 ;
 
 -- --------------------------------------------------------
 
@@ -2029,7 +2030,7 @@ CREATE TABLE `panels_pane` (
   `uuid` char(36) DEFAULT NULL,
   PRIMARY KEY (`pid`),
   KEY `did_idx` (`did`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=89 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
 
 -- --------------------------------------------------------
 
@@ -2076,7 +2077,7 @@ CREATE TABLE `queue` (
   PRIMARY KEY (`item_id`),
   KEY `name_created` (`name`,`created`),
   KEY `expire` (`expire`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores items in queues.' AUTO_INCREMENT=250 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores items in queues.' AUTO_INCREMENT=326 ;
 
 -- --------------------------------------------------------
 
@@ -2314,7 +2315,7 @@ CREATE TABLE `simplemeta` (
   `fit` int(11) NOT NULL DEFAULT '0' COMMENT 'A numeric representation of how specific the path is.',
   PRIMARY KEY (`sid`),
   UNIQUE KEY `path_language` (`path`,`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -2595,7 +2596,7 @@ CREATE TABLE `watchdog` (
   KEY `type` (`type`),
   KEY `uid` (`uid`),
   KEY `severity` (`severity`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.' AUTO_INCREMENT=868 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.' AUTO_INCREMENT=1057 ;
 
 -- --------------------------------------------------------
 
@@ -2666,3 +2667,7 @@ CREATE TABLE `xmlsitemap_sitemap` (
   `max_filesize` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`smid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
