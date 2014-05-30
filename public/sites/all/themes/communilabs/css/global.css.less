@@ -104,30 +104,29 @@ span.follow-link-wrapper a {
 
 
 /*navigation*/
-.navigation {
-	li {
-		margin:0;
-		a {
-			.fontLighter;
-			.fontBody;
-			color: 				white;
-			display: 			inline-block;
-			font-size: 			18px;
-			text-decoration: 	none;
-			padding:23px 20px;			
-				&:hover {
-					background: 		@colorTealDark;
-					color: 				white;
-					text-decoration: 	none;
-				}
-				&.active {
-					background: 	@colorTeal;
-					color: 			white;
-				}
-				&:visited {
-					background: 	none;
-				}	
-		}	
+ul.nice-menu-down {
+	margin-left: 	20px;
+	li, li.menuparent {
+		background: @colorTeal;
+		border:		none;
+		color:		white;
+		padding:	15px 20px 16px;
+			&:hover, &.active-trail {
+				background: @colorTealDark;
+				text-decoration: none;
+			}
+		}
+	ul {
+		border-top:	0;
+		margin-top:	25px;
+	}
+	a {	
+		color:					white;
+		padding:				0;
+		text-decoration: 		none;
+			&:hover {
+				text-decoration: 	none;
+			}
 	}
 }
 
