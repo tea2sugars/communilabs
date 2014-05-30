@@ -186,14 +186,14 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 }
 
 .news_wrapper {
-	padding:		20px 0 10px 0; 
-	margin:-20px 10px 40px 10px;
-	background-color: @colorGreyLight;	
+	padding:			20px 0 10px 0; 
+	margin:				-20px 10px 40px 10px;
+	background-color: 	@colorGreyLight;	
 	p {
 		margin-bottom: 	0px;
 	}
 	.grid-2, .grid-3 {
-		margin:0;
+		margin:			0;
 	}
 
 }
@@ -251,7 +251,7 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	border:0;
 	border-radius:0;
 	margin:0 auto;
-	width:25%;
+	width:100%;
 	li {
 		background:none;
 		border:0;
@@ -278,6 +278,8 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 /*comments*/
 
 #comments {
+	border-top:		4px dotted black;
+	padding-top:	20px;
 	article {
 		background: 	@colorTealLighter;
 		margin-bottom: 	20px;
@@ -290,10 +292,13 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 			}
 	}
 	form.comment-form {
-		background: 	@colorTealLighter;
 		margin-bottom: 	20px;
 		padding:		20px;
 		
+	}
+	h2.comment-form {
+		border-top:		4px dotted black;
+		padding-top:	20px;
 	}
 }
 
