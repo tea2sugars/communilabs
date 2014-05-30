@@ -107,18 +107,27 @@ span.follow-link-wrapper a {
 ul.nice-menu-down {
 	margin-left: 	20px;
 	li, li.menuparent {
-		background: @colorTeal;
+		background: none;
 		border:		none;
 		color:		white;
+		margin:		0 0 0 5px;
 		padding:	15px 20px 16px;
 			&:hover, &.active-trail {
-				background: @colorTealDark;
+				background: @colorTeal;
 				text-decoration: none;
 			}
 		}
 	ul {
 		border-top:	0;
-		margin-top:	25px;
+		margin:		25px 0 0 0;
+		li {
+			background: 	@colorTeal;
+			margin-left: 	0;
+			&:hover {
+					background: 		@colorTealDark;
+					text-decoration: 	none;
+				}
+		}
 	}
 	a {	
 		color:					white;
