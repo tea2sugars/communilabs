@@ -30,7 +30,7 @@
 	  </div>
 	</div>
 	  
-	<div class="homepage_wrapper clear">
+	<div class="homepage_wrapper pricelist clear">
 	  <div class="panel-panel grid-4">
 	    <div class="inside"><?php print $content['7']; ?></div>
 	  </div>
