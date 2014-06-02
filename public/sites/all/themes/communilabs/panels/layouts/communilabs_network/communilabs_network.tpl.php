@@ -7,14 +7,17 @@
 	</div>
 	  
 	<div class="homepage_wrapper clear">
-	  <div class="panel-panel grid-12">
+	  <div class="panel-panel grid-12 two-col-text">
 	    <div class="inside"><?php print $content['1']; ?></div>
 	  </div>
-	  <div class="panel-panel grid-12">
+	  <div class="panel-panel grid-12 two-col-text"">
 	    <div class="inside"><?php print $content['2']; ?></div>
 	  </div>
-	  <div class="panel-panel grid-12">
-	    <div class="inside"><?php print $content['3']; ?></div>
+	  <div class="panel-panel grid-6">
+	    <div class="inside"><?php print $content['3a']; ?></div>
+	  </div>
+	  <div class="panel-panel grid-6">
+	    <div class="inside"><?php print $content['3b']; ?></div>
 	  </div>
 	    <div class="panel-panel grid-12">
 	    <div class="inside"><?php print $content['4']; ?></div>

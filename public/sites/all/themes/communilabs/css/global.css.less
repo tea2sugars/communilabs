@@ -77,23 +77,48 @@ body {
 		
 		.footnote {
 			color: 		@colorGreyDark;
-			font-size: 	12px;
+			.small-text;
 		}
 		
-		/*Style overides*/
-		.block-community h2 {
-			color:	@colorCommunity;
-		}
-		.block-uni h2 {
-			color:	@colorUni;
-		}
-		.block-local h2 {
-			color:	@colorLocal;
-		}
-		.block-business h2 {
-			color:	@colorBusiness;
-		}
 }
+
+#business {
+	h1, h2, h3, h4 {
+		color: 		@colorBusiness;
+	}
+	blockquote {
+		background: @colorBusiness;
+	}
+}
+
+#local {
+	h1, h2, h3, h4 {
+		color: 		@colorLocal;
+	}
+	blockquote {
+		background: @colorLocal;
+	}
+}
+
+#community {
+	h1, h2, h3, h4 {
+		color: 		@colorCommunity;
+	}
+	blockquote {
+		background: @colorCommunity;
+	}
+}
+
+#uni {
+	h1, h2, h3, h4 {
+		color: 		@colorUni;
+	}
+	blockquote {
+		background: @colorUni;
+	}
+}
+
+
 
 span.follow-link-wrapper a {
 	float:right;
@@ -226,17 +251,15 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 			line-height:	40px;
 		}
 		.field-name-field-name-of-source div {
-			font-size:		12px;
-			line-height:	1.666;
+			.small-text;
 		}
 }
 
 
 /*Blog*/
 .submitted, .submitted span, .views-field-created, .comment-submitted  {
+	.small-text;
 	color: 			@colorGreyDark;
-	font-size:		13px;
-	line-height: 	1.54;
 	margin-bottom: 	20px;
 }
 
@@ -369,7 +392,7 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 		margin-top:		20px;
 	}
 	h2 {
-		color: white;
+		color: white !important;
 	}
 	.center-grid {
 			margin:0 9px;
@@ -380,19 +403,24 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	}
 }
 
-.speech-bubble {
-	background: 	@colorCommunity;
+blockquote {
+	border-radius: 	5px 5px 0 0;
 	color: 			white;
 	font-size: 		22px;
 	line-height:	40px;
 	padding: 		20px;	
+	
 }
 
-.pane-content {
-	columns:			2;
-	-webkit-columns:	2; /* Safari and Chrome */
-	-moz-columns:		2; /* Firefox */
+.two-col-text {
+	.pane-content {
+		columns:2;
+		-webkit-columns:2; /* Safari and Chrome */
+		-moz-columns:2; /* Firefox */
+	}
 }
+
+.grid-6 img {width:100%; height:auto;}
 
 
 

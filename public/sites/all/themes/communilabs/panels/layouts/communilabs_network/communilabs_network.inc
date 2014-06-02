@@ -12,9 +12,10 @@ function communilabs_communilabs_network_panels_layouts() {
 	'admin css' => 'communilabs_network.css',
     'regions' => array(
       'header' => t('Header'),
-      '1' => t('1'),
-      '2' => t('2'),
-      '3' => t('3'),
+      '1' => t('1 (2 column text)'),
+      '2' => t('2 (2 column text)'),
+      '3a' => t('3a'),
+      '3b' => t('3b'),
       '4' => t('4'),
       '5' => t('5'),
       '5' => t('5'),
