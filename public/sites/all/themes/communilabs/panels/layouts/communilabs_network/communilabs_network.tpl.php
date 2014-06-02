@@ -34,7 +34,7 @@
 	  <div class="panel-panel grid-4">
 	    <div class="inside"><?php print $content['7']; ?></div>
 	  </div>
-	  <div class="panel-panel grid-4">
+	  <div class="panel-panel grid-4 center-grid">
 	    <div class="inside"><?php print $content['8']; ?></div>
 	  </div>
 	  <div class="panel-panel grid-4">
