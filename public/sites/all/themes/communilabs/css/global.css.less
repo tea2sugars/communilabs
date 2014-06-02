@@ -356,16 +356,19 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 .pricelist {
 	background: 	@colorCyan;
 	color:			white;
-	padding-top:	20px;
-	padding-bottom:	20px;
 	text-align: 	center;
+	.panel-panel img {
+		margin-top:		20px;
+	}
 	h2 {
 		color: white;
 	}
 	.center-grid {
-		border-left:	1px solid white;
-		border-right:	1px solid white;
-		margin:0 9px;
+			margin:0 9px;
+			@media all and @breakpoint-narrow-plus {
+				border-left:	1px solid white;
+				border-right:	1px solid white;
+			}
 	}
 }
 
