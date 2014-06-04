@@ -50,5 +50,21 @@
 	    <div class="inside"><?php print $content['10']; ?></div>
 	  </div>
 	</div>
+	
+	<div class="homepage_wrapper clear">
+	  <div class="panel-panel grid-3">
+	    <div class="inside"><?php print $content['11a']; ?></div>
+	  </div>
+	  <div class="panel-panel grid-3">
+	    <div class="inside"><?php print $content['11b']; ?></div>
+	  </div>
+	  <div class="panel-panel grid-3">
+	    <div class="inside"><?php print $content['11c']; ?></div>
+	  </div>
+	  <div class="panel-panel grid-3">
+	    <div class="inside"><?php print $content['11d']; ?></div>
+	  </div>
+  </div>
+
   
 </div>

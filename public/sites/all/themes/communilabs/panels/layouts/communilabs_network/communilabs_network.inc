@@ -24,6 +24,10 @@ function communilabs_communilabs_network_panels_layouts() {
       '8' => t('8'),
       '9' => t('9'),
       '10' => t('10'),
+      '11a' => t('11a'),
+      '11b' => t('11b'),
+      '11c' => t('11c'),
+      '11d' => t('11d'),
     ),
   );
 
