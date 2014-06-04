@@ -82,6 +82,73 @@ body {
 		
 }
 
+/*buttons*/
+.button_small {
+	.fontBody;
+	.fontLighter;
+	.rounded;
+	background:		@colorTeal;
+	border: 		1px solid @colorTealDark;
+	color: 			white;
+	font-size: 		14px;
+	font-style: 	italic;
+	text-shadow: 	none;
+		&:hover {
+			background:			@colorTealDark;
+			color: 				white;
+			text-decoration: 	none;
+		}
+}
+
+.button_small_grey {
+	.fontBody;
+	.fontLighter;
+	.rounded;
+	background: 	@colorGreyDark;
+	color:			white;
+	border: 		1px solid @colorGreyLight;
+	color: 			white;
+	font-size: 		14px;
+	font-style: 	italic;
+	text-shadow: 	none;
+		&:hover {
+			background: 		@colorGreyLight;
+			text-decoration: 	none;
+			}
+}
+
+.button_large {
+	.box_padding;
+	.fontBody;
+	.fontLighter;
+	.rounded;
+	background:		@colorTeal;
+	border: 		1px solid @colorTealDark;
+	color: 			white !important;
+	font-size: 		14px;
+	font-style: 	italic;
+	text-shadow: 	none;
+		&:hover {
+				background:			@colorTealDark;
+				color: 				white;
+				text-decoration: 	none;
+			}
+		&:visited {
+				color: 				white;
+				text-decoration: 	none;
+			}	
+}
+
+.strip_button {
+	background: 	none;
+	border: 		none;
+	font-weight:	400;
+	text-shadow: 	none;
+	border-radius: 	0;
+	color: 			@colorTeal;	
+}
+
+
 /*Network specific styles*/
 #business {
 	h1, h2, h3, h4 {
@@ -89,6 +156,16 @@ body {
 	}
 	blockquote {
 		background: @colorBusiness;
+	}
+}
+
+.block-business {
+	h2 {
+		color: 		@colorBusiness;
+	}
+	.button_large {
+		background: 	@colorBusiness;
+		border-color:	@colorBusiness;
 	}
 }
 
@@ -101,6 +178,16 @@ body {
 	}
 }
 
+.block-local {
+	h2 {
+		color: 		@colorLocal;
+	}
+	.button_large {
+		background: 	@colorLocal;
+		border-color:	@colorLocal;
+	}
+}
+
 #community {
 	h1, h2, h3, h4 {
 		color: 		@colorCommunity;
@@ -110,12 +197,33 @@ body {
 	}
 }
 
+.block-community {
+	h2 {
+		color: 		@colorCommunity;
+	}
+	.button_large {
+		background: 	@colorCommunity;
+		border-color:	@colorCommunity;
+	}
+}
+
 #uni {
 	h1, h2, h3, h4 {
-		color: 		@colorUni;
+		color: 			@colorUni;
+		
 	}
 	blockquote {
-		background: @colorUni;
+		background: 	@colorUni;
+	}
+}
+
+.block-uni {
+	h2 {
+		color: 		@colorUni;
+	}
+	.button_large {
+		background: 	@colorUni;
+		border-color:	@colorUni;
 	}
 }
 
