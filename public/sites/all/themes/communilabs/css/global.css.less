@@ -247,41 +247,81 @@ span.follow-link-wrapper a {
 
 
 /*navigation*/
-ul.nice-menu-down {
-	margin-left: 	20px;
-	li, li.menuparent {
-		background: none;
-		border:		none;
-		color:		white;
-		margin:		0 0 0 5px;
-		padding:	15px 20px 16px;
+.block-nice-menus {
+	float:right;
+	width:	30%;
+	@media all and @breakpoint-normal-plus {
+		width:750px;
+	}
+	@media all and @breakpoint-wide-plus {
+		width:990px;
+	}
+	
+	
+	}
+	ul.nice-menu-down {
+		margin:0 0 0 0;
+		@media all and @breakpoint-normal-plus {
+			margin:	0 0 0 40px;
+		}
+		@media all and @breakpoint-wide-plus {
+			margin:		0 0 0 80px;
+		}
+		li, li.menuparent {
+			background: none;
+			border:		none;
+			color:		white;
+			margin:		0 0 0 5px;
+			padding:	0px;
+			@media all and @breakpoint-normal-plus {
+				padding:	15px 10px 16px 10px;
+			}
+			@media all and @breakpoint-wide-plus {
+				padding:	15px 20px 16px 20px;
+			}
 			&:hover, &.active-trail {
 				background: @colorTeal;
 				text-decoration: none;
+				}
+			}
+		ul {
+			border-top:	0;
+			margin:		25px 0 0 0;
+			li {
+				background: 	@colorTeal;
+				margin-left: 	0;
+				&:hover {
+						background: 		@colorTealDark;
+						text-decoration: 	none;
+					}
 			}
 		}
-	ul {
-		border-top:	0;
-		margin:		25px 0 0 0;
-		li {
-			background: 	@colorTeal;
-			margin-left: 	0;
-			&:hover {
-					background: 		@colorTealDark;
+		a {	
+			color:					white;
+			padding:				0;
+			text-decoration: 		none;
+				&:hover {
+					color:				white;
 					text-decoration: 	none;
 				}
 		}
-	}
-	a {	
-		color:					white;
-		padding:				0;
-		text-decoration: 		none;
-			&:hover {
-				color:				white;
-				text-decoration: 	none;
-			}
-	}
+		
 }
+
+/*Responsive menu*/
+#sidr-wrapper-0 {
+			float:					right;
+			a {
+				color: 				white;
+				display: 			block;
+				font-size: 			20px;
+				height:				40px;
+				padding-top:		10px;
+				text-decoration: 	none;
+				text-transform: 	uppercase;
+				}
+}
+
 
 /*Form and Buttons*/
 
@@ -305,10 +345,19 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 }
 
 #zone-branding-wrapper {
+	
 	background:		@colorPrimary;
-	.logo-img {
-		.baseline_margin;
-	}	
+	.branding-data {
+		float:left;
+		width:187px;
+		@media all and @breakpoint-narrow-plus {
+			width:187px;
+		}
+			.logo-img {
+					.baseline_margin;
+					}
+	}
+		
 } 
 
 #section-footer {
@@ -529,6 +578,14 @@ blockquote {
 		columns:2;
 		-webkit-columns:2; /* Safari and Chrome */
 		-moz-columns:2; /* Firefox */
+	}
+}
+
+.bean-image-block-12-column img {
+	width:100%;
+	height:auto;
+	@media all and @breakpoint-narrow-plus {
+		width:inherit;
 	}
 }
 
