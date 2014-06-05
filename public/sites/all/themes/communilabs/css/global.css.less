@@ -152,16 +152,16 @@ body {
 /*Network specific styles*/
 #business {
 	h1, h2, h3, h4 {
-		color: 		@colorBusiness;
+		color: 			@colorBusiness;
 	}
 	blockquote {
-		background: @colorBusiness;
+		background: 	@colorBusiness;
 	}
 }
 
 .block-business {
 	h2 {
-		color: 		@colorBusiness;
+		color: 			@colorBusiness;
 	}
 	.button_large {
 		background: 	@colorBusiness;
@@ -171,16 +171,16 @@ body {
 
 #local {
 	h1, h2, h3, h4 {
-		color: 		@colorLocal;
+		color: 			@colorLocal;
 	}
 	blockquote {
-		background: @colorLocal;
+		background: 	@colorLocal;
 	}
 }
 
 .block-local {
 	h2 {
-		color: 		@colorLocal;
+		color: 			@colorLocal;
 	}
 	.button_large {
 		background: 	@colorLocal;
@@ -190,16 +190,16 @@ body {
 
 #community {
 	h1, h2, h3, h4 {
-		color: 		@colorCommunity;
+		color: 			@colorCommunity;
 	}
 	blockquote {
-		background: @colorCommunity;
+		background:		@colorCommunity;
 	}
 }
 
 .block-community {
 	h2 {
-		color: 		@colorCommunity;
+		color: 			@colorCommunity;
 	}
 	.button_large {
 		background: 	@colorCommunity;
@@ -219,7 +219,7 @@ body {
 
 .block-uni {
 	h2 {
-		color: 		@colorUni;
+		color: 			@colorUni;
 	}
 	.button_large {
 		background: 	@colorUni;
@@ -248,21 +248,21 @@ span.follow-link-wrapper a {
 
 /*navigation*/
 .block-nice-menus {
-	float:right;
-	width:	30%;
+	float:		right;
+	width:		30%;
 	@media all and @breakpoint-normal-plus {
-		width:750px;
+		width:		750px;
 	}
 	@media all and @breakpoint-wide-plus {
-		width:990px;
+		width:		990px;
 	}
 	
 	
 	}
 	ul.nice-menu-down {
-		margin:0 0 0 0;
+		margin:		0 0 0 0;
 		@media all and @breakpoint-normal-plus {
-			margin:	0 0 0 40px;
+			margin:		0 0 0 40px;
 		}
 		@media all and @breakpoint-wide-plus {
 			margin:		0 0 0 80px;
@@ -280,8 +280,8 @@ span.follow-link-wrapper a {
 				padding:	15px 20px 16px 20px;
 			}
 			&:hover, &.active-trail {
-				background: @colorTeal;
-				text-decoration: none;
+				background: 		@colorTeal;
+				text-decoration: 	none;
 				}
 			}
 		ul {
@@ -297,9 +297,9 @@ span.follow-link-wrapper a {
 			}
 		}
 		a {	
-			color:					white;
-			padding:				0;
-			text-decoration: 		none;
+			color:						white;
+			padding:					0;
+			text-decoration: 			none;
 				&:hover {
 					color:				white;
 					text-decoration: 	none;
@@ -320,6 +320,48 @@ span.follow-link-wrapper a {
 				text-decoration: 	none;
 				text-transform: 	uppercase;
 				}
+}
+
+.sidr {
+	background: @colorGreyDarker !important;
+		.sidr-class-nolink {
+			border-bottom: 1px solid white;
+			
+		}
+			
+			li {
+				list-style: none !important;
+				padding: 10px 0 10px 20px;
+				border:none;
+					a {
+					border:none;
+					color:	white;
+					&:hover {
+						text-decoration: none;
+						color: white
+						}
+				}
+
+					ul {
+						border:none;
+						li {
+							list-style: none !important;
+							padding:0;
+							margin: 0;
+							border:none;
+							a {
+								padding:0 0 0 5px;
+								&:hover {
+									text-decoration: none;
+									color: white
+								}
+							}
+							}
+					}
+					
+		
+				}
+			
 }
 
 
