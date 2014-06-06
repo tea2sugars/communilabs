@@ -10,9 +10,13 @@ body {
 		}
 		
 		h1 {
-			font-size: 		30px;
-			line-height:	1.25;
+			font-size:		22px;
+			line-height:	1.1;
 			margin-bottom: 	20px;
+			@media all and @breakpoint-narrow-plus {
+				font-size: 		30px;
+				line-height:	1.25;
+			}
 		}
 		h2, h2.node-title, h2.block-title {
 			font-size:		18px;
@@ -617,9 +621,11 @@ blockquote {
 
 .two-col-text {
 	.pane-content {
-		columns:2;
-		-webkit-columns:2; /* Safari and Chrome */
-		-moz-columns:2; /* Firefox */
+		@media all and @breakpoint-narrow-plus {
+			columns:			2;
+			-webkit-columns:	2; /* Safari and Chrome */
+			-moz-columns:		2; /* Firefox */
+		}
 	}
 }
 
