@@ -641,8 +641,94 @@ blockquote {
 }
 
 .view-display-id-block_3, .pane-views-tweets-block {
-	outline: 	1px solid @colorGreyLight;
+	.rounded;
+	border: 	1px solid @colorGreyLight;
 	padding:	10px;
+	margin-bottom: 20px;
+}
+
+.pane-views-tweets-block { 
+	#twitter-profile-image {
+		float:		left;
+		margin:		0 0 0 0;
+		width:		20%;
+		
+	}
+	#twitter-meta {
+		float:		left;
+		width:		60%;
+			p {
+				margin-bottom: 0;
+			}
+	}
+	#twitter-follow {
+		float:		right;
+		text-align: right;
+		width:		20%;
+		
+		
+			p {
+				margin-bottom: 0;
+			}
+	}
+	#twitter-message {
+		margin-top:20px;
+		width:		100%;
+			p {
+				margin-bottom: 0;
+			}
+	}
+	#twitter-indents {
+		border-top: 	1px solid @colorGreyLight;
+		margin-top:		10px;
+		padding-top:	10px;
+			span {
+				margin: 	0 20px;
+				@media all and @breakpoint-narrow-plus {
+					margin: 	0 25px;
+				}
+				@media all and @breakpoint-normal-plus {
+					margin: 	0 40px;
+				}
+				@media all and @breakpoint-wide-plus {
+					margin: 	0 65px;
+				}
+				
+			}
+	}
+	/*.views-field-profile-image-url {
+		float:		left;
+		margin:		0 60px 0 0;
+		width:		50px;
+	}
+	.views-field-name, .views-field-screen-name {
+		float:		left;
+		width:		120px;
+	}
+	.views-field-follow {
+		float:		left;
+		width:		50px;
+	}
+	.views-field-follow:after {
+		clear:both;
+	}
+	.views-field-text {
+		width:100%;
+		float:left;
+	}
+	<div id="twitter-profile-image">[profile_image_url]</div>
+<div id="twitter-meta">
+[name]<br/>
+[screen_name]
+</div>
+<div id="twitter-follow">
+[follow]
+</div>
+<div class="clearfix"></div>
+<div id="twitter-message">
+[text]<br/>
+[created_time]
+</div>*/
 }
 
 
