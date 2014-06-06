@@ -167,6 +167,7 @@ body {
 	h2 {
 		color: 			@colorBusiness;
 	}
+	
 	.button_large {
 		background: 	@colorBusiness;
 		border-color:	@colorBusiness;
@@ -186,6 +187,7 @@ body {
 	h2 {
 		color: 			@colorLocal;
 	}
+	
 	.button_large {
 		background: 	@colorLocal;
 		border-color:	@colorLocal;
@@ -205,6 +207,7 @@ body {
 	h2 {
 		color: 			@colorCommunity;
 	}
+	
 	.button_large {
 		background: 	@colorCommunity;
 		border-color:	@colorCommunity;
@@ -225,10 +228,19 @@ body {
 	h2 {
 		color: 			@colorUni;
 	}
+	
 	.button_large {
 		background: 	@colorUni;
 		border-color:	@colorUni;
 	}
+}
+
+.block-uni, .block-community, .block-local, .block-business {
+	margin-bottom: 40px;
+		@media all and @breakpoint-narrow-plus {
+			margin-bottom: 0;
+		}
+	
 }
 
 
@@ -643,10 +655,15 @@ blockquote {
 .view-display-id-block_3, .pane-views-tweets-block {
 	.rounded;
 	border: 	1px solid @colorGreyLight;
+	min-height: 180px;
+		@media all and @breakpoint-wide-plus {
+			min-height: 160px;
+	}
 	padding:	10px;
 	margin-bottom: 20px;
 }
 
+/* Twitter block on homepage*/
 .pane-views-tweets-block { 
 	#twitter-profile-image {
 		float:		left;
@@ -696,39 +713,18 @@ blockquote {
 				
 			}
 	}
-	/*.views-field-profile-image-url {
-		float:		left;
-		margin:		0 60px 0 0;
-		width:		50px;
-	}
-	.views-field-name, .views-field-screen-name {
-		float:		left;
-		width:		120px;
-	}
-	.views-field-follow {
-		float:		left;
-		width:		50px;
-	}
-	.views-field-follow:after {
-		clear:both;
-	}
-	.views-field-text {
-		width:100%;
+}
+
+.view-display-id-block_3 {
+	.views-field-field-blog-image {
 		float:left;
+		width:25%;
 	}
-	<div id="twitter-profile-image">[profile_image_url]</div>
-<div id="twitter-meta">
-[name]<br/>
-[screen_name]
-</div>
-<div id="twitter-follow">
-[follow]
-</div>
-<div class="clearfix"></div>
-<div id="twitter-message">
-[text]<br/>
-[created_time]
-</div>*/
+	.views-field-title {
+		float:left;
+		padding-top: 10px;
+		width:75%;
+	}
 }
 
 
