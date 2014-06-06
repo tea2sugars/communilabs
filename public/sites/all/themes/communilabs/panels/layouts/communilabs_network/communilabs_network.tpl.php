@@ -10,7 +10,7 @@
 	  <div class="panel-panel grid-12 two-col-text">
 	    <div class="inside"><?php print $content['1']; ?></div>
 	  </div>
-	  <div class="panel-panel grid-12 two-col-text"">
+	  <div class="panel-panel grid-12 two-col-text">
 	    <div class="inside"><?php print $content['2']; ?></div>
 	  </div>
 	  <div class="panel-panel grid-6">

@@ -35,11 +35,17 @@ body {
 			margin-bottom:	20px;
 		}
 		
-		p, div {
+		p, div, .content li {
 			font-size:		14px;
 			line-height:	1.4;
 		}
+		
+		.content li {
+			margin-bottom: 10px;
+		}
+		
 		p {
+			color: @colorGreyDark;
 			margin-bottom: 	20px;
 		}
 		
@@ -232,6 +238,12 @@ body {
 	.button_large {
 		background: 	@colorUni;
 		border-color:	@colorUni;
+	}
+}
+
+.context-about-us {
+	blockquote {
+		background: 	@colorMagenta;
 	}
 }
 
@@ -433,11 +445,13 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	}
 }
 
-.panel-separator, .homepage_wrapper {
-	margin-bottom:	40px;
+.panel-separator, .homepage_wrapper, .homepage_image_wrapper {
+ margin-bottom: 20px;
 	}
-.homepage_image_wrapper {
-	margin-bottom:	20px;
+
+.panel-border {
+	border-bottom: 4px dotted @colorNavy;
+	padding-bottom: 20px;
 }
 .center-content {
 	text-align: 	center;
@@ -564,31 +578,41 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 .context-partners-and-members {
 
 		.views-grid-3 {
-			float:	left;
-			margin:	0 2%;
-			width:	46%;
+			float:		left;
+			height:		auto;
+			margin:		0 2%;
+			width:		46%;
 				@media all and @breakpoint-narrow-plus {
-					width:160px;
-					margin:0 20px 0 0;				}
+					width:		160px;
+					margin:		0 20px 0 0;				}
 				@media all and @breakpoint-normal-plus {
-					width:220px;
+					width:		220px;
 				}
 				@media all and @breakpoint-wide-plus {
-					width:280px;
+					width:		280px;
 				}
-			.views-field-field-logo {
-				height:240px;
-				img {
-					width:100%;
-					height:auto;
-					@media all and @breakpoint-narrow-plus {
-						width:inherit;
-					}
+		.views-field-field-logo {
+			height:			243px;
+			@media all and @breakpoint-narrow-plus {
+				height:		114px;
+			}
+			@media all and @breakpoint-normal-plus {
+				height:		157px;
+			}
+			@media all and @breakpoint-normal-plus {
+				height:		200px;
+			}
+			img {
+				width:		100%;
+				height:		auto;
+				@media all and @breakpoint-narrow-plus {
+					width:	inherit;
 				}
 			}
+		}
 			.views-field-title {
-				min-height:40px;
-				margin:20px 0;
+				min-height:		40px;
+				margin:			20px 0;
 			}
 		}
 		.views-row-4, 	.views-row-8,
@@ -610,7 +634,7 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	.panel-panel img {
 		margin-top:		20px;
 	}
-	h2 {
+	h2, p {
 		color: white !important;
 	}
 	.center-grid {
@@ -624,11 +648,13 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 
 blockquote {
 	.rounded;
-	color: 			white;
-	font-size: 		22px;
-	font-style: 	italic;	
-	line-height:	40px;
 	padding: 		20px;
+		p {
+			color: 			white;
+			font-size: 		22px;
+			font-style: 	italic;	
+			line-height:	40px;
+		}
 }
 
 .two-col-text {
@@ -718,12 +744,12 @@ blockquote {
 .view-display-id-block_3 {
 	.views-field-field-blog-image {
 		float:left;
-		width:25%;
+		width:20%;
 	}
 	.views-field-title {
 		float:left;
 		padding-top: 10px;
-		width:75%;
+		width:80%;
 	}
 }
 
