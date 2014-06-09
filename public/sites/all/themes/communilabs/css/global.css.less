@@ -666,12 +666,17 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 
 blockquote {
 	.rounded;
-	padding: 		20px;
+	
 		p {
 			color: 			white;
-			font-size: 		22px;
+			font-size: 		16px;
 			font-style: 	italic;	
-			line-height:	40px;
+			line-height:	20px;
+			text-align: 	justify;
+			@media all and @breakpoint-narrow-plus {
+				font-size: 		20px;
+				line-height:	30px;
+			}
 		}
 }
 
