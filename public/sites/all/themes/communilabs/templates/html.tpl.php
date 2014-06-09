@@ -7,6 +7,7 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <?php print $scripts; ?>
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="/sites/all/libraries/modernizr/modernizr.js"></script>
 </head>
 <body<?php print $attributes;?>>
   <div id="skip-link">
