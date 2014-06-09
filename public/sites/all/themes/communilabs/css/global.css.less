@@ -276,7 +276,7 @@ body {
 
 
 span.follow-link-wrapper a {
-	float:right;
+	text-align: right;
 }
 .follow-links {margin-top:-5px;}
 
@@ -456,6 +456,10 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 		color: 				white;
 		margin-bottom:		10px;
 	}
+	h2 {
+		font-size: 	16px;
+		color:		white;
+	}
 	a {
 		color: 				white;
 		text-decoration: 	none;
@@ -470,6 +474,12 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 		p {
 			font-size: 		11px;
 			text-align: 	center;
+		}
+	}
+	#block-bean-footer-communilab-logo {
+		img {
+			outline:1px solid white;
+			padding:5px;
 		}
 	}
 }
@@ -708,7 +718,7 @@ blockquote {
 	}
 }
 
-.bean-image-block-12-column img {
+.bean-image-block-12-column img, .bean-image-block-6-column img {
 	width:		100%;
 	height:		auto;
 	@media all and @breakpoint-narrow-plus {
@@ -719,9 +729,9 @@ blockquote {
 .view-display-id-block_3, .pane-views-tweets-block {
 	.rounded;
 	border: 	1px solid @colorGreyLight;
-	min-height: 180px;
+	min-height: 190px;
 		@media all and @breakpoint-wide-plus {
-			min-height: 160px;
+			min-height: 170px;
 	}
 	padding:	10px;
 	margin-bottom: 20px;
