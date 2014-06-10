@@ -51,6 +51,16 @@
 	padding:			10px;
 } 
 
+/*Responsive Image*/
+
+.responsive_image {
+	width:100%;
+	height:auto;
+	@media all and @breakpoint-narrow-plus {
+		width:	inherit;
+	}
+}
+
 /* mq for changing things at breakpoints - so after the area labelled */
 @breakpoint-narrow-plus: ~'(min-width: 768px)';
 @breakpoint-normal-plus: ~'(min-width: 980px)';

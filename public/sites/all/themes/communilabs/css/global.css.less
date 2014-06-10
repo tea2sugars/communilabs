@@ -587,7 +587,15 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 				width:100%;
 				height:auto;
 			}
-		}
+}
+
+
+.views-field-field-blog-image, .field-name-field-blog-image, .bean-image-block-12-column, .bean-image-block-6-column {
+	img {
+		.responsive_image
+	}
+}
+
 
 /*pager*/
 
@@ -678,11 +686,7 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 				height:		200px;
 			}
 			img {
-				width:		100%;
-				height:		auto;
-				@media all and @breakpoint-narrow-plus {
-					width:	inherit;
-				}
+				.responsive_image;
 			}
 		}
 			.views-field-title {
@@ -756,14 +760,6 @@ blockquote {
 			-moz-column-gap:	20px; /* Firefox */
 			-webkit-column-gap:	20px; /* Safari and Chrome */
 		}
-	}
-}
-
-.bean-image-block-12-column img, .bean-image-block-6-column img {
-	width:		100%;
-	height:		auto;
-	@media all and @breakpoint-narrow-plus {
-		width:		inherit;
 	}
 }
 
