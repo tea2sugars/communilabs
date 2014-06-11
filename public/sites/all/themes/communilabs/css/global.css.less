@@ -13,6 +13,7 @@ body {
 			font-size:		22px;
 			line-height:	1.1;
 			margin-bottom: 	20px;
+			max-width: 		80%;
 			@media all and @breakpoint-narrow-plus {
 				font-size: 		30px;
 				line-height:	1.25;
@@ -158,6 +159,35 @@ body {
 	color: 			@colorTeal;	
 }
 
+/*Networks*/
+.pricelist {
+	.rounded;
+	background: 	@colorBusiness;
+	color:			white;
+	margin: 		0 10px 20px 10px;
+		@media all and @breakpoint-narrow-plus {
+		margin:		0 0 20px 0;
+		}
+	text-align: 	center;
+	
+	.panel-panel img {
+		margin-top:		20px;
+	}
+	h2, p {
+		color: white !important;
+	}
+	.center-grid {
+		border-top:	1px solid white;
+		border-bottom:	1px solid white;
+			@media all and @breakpoint-narrow-plus {
+				margin:0 9px;
+				border-left:	1px solid white;
+				border-right:	1px solid white;
+				border-top:		none;
+				border-bottom:	none;
+			}
+	}
+}
 
 /*Network specific styles*/
 #business {
@@ -172,6 +202,9 @@ body {
 			.rounded;
 			padding:20px 40px 30px 40px;
 		}
+	}
+	.pricelist {
+		background: 	@colorBusiness;
 	}
 }
 
@@ -199,6 +232,9 @@ body {
 			padding:20px 40px 30px 40px;
 		}
 	}
+	.pricelist {
+		background: 	@colorLocal;
+	}
 }
 
 .block-local {
@@ -224,6 +260,9 @@ body {
 			.rounded;
 			padding:20px 40px 30px 40px;
 		}
+	}
+	.pricelist {
+		background: 	@colorCommunity;
 	}
 }
 
@@ -251,6 +290,9 @@ body {
 			.rounded;
 			padding:20px 40px 30px 40px;
 		}
+	}
+	.pricelist {
+		background: 	@colorUni;
 	}
 }
 
@@ -716,35 +758,7 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 		}	
 }
 
-/*Networks*/
-.pricelist {
-	.rounded;
-	background: 	@colorBusiness;
-	color:			white;
-	margin: 		0 10px 20px 10px;
-		@media all and @breakpoint-narrow-plus {
-		margin:		0 0 20px 0;
-		}
-	text-align: 	center;
-	
-	.panel-panel img {
-		margin-top:		20px;
-	}
-	h2, p {
-		color: white !important;
-	}
-	.center-grid {
-		border-top:	1px solid white;
-		border-bottom:	1px solid white;
-			@media all and @breakpoint-narrow-plus {
-				margin:0 9px;
-				border-left:	1px solid white;
-				border-right:	1px solid white;
-				border-top:		none;
-				border-bottom:	none;
-			}
-	}
-}
+
 
 blockquote {
 	.rounded;
