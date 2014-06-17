@@ -189,6 +189,18 @@ body {
 	}
 }
 
+.context-about-us {
+	blockquote {
+		background:	url(../images/magenta_tick.png) 40px bottom no-repeat;
+		padding-bottom: 35px;
+		p {
+			background: @colorBusiness;
+			.rounded;
+			padding:20px 40px 30px 40px;
+		}
+	}
+}
+
 /*Network specific styles*/
 #business {
 	h1, h2, h3, h4 {
@@ -307,12 +319,6 @@ body {
 	}
 }
 
-.context-about-us {
-	blockquote {
-		background: 	@colorMagenta;
-	}
-}
-
 .block-uni, .block-community, .block-local, .block-business {
 	margin-bottom: 40px;
 		@media all and @breakpoint-narrow-plus {
@@ -384,6 +390,7 @@ span.follow-link-wrapper a {
 			li {
 				background: 	@colorTeal;
 				margin-left: 	0;
+				width:			240px;
 				&:hover {
 						background: 		@colorTealDark;
 						text-decoration: 	none;
@@ -773,7 +780,14 @@ blockquote {
 				font-size: 		20px;
 				line-height:	30px;
 			}
+		
 		}
+		
+		a {
+			color:				white !important;
+			text-decoration: 	underline !important;
+		}
+		
 }
 
 .two-col-text {
