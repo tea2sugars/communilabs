@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 10, 2014 at 03:48 PM
+-- Generation Time: Jun 19, 2014 at 12:14 PM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `communilab`
+-- Database: `communilab_live`
 --
 
 -- --------------------------------------------------------
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `bean` (
   PRIMARY KEY (`bid`),
   UNIQUE KEY `vid` (`vid`),
   UNIQUE KEY `delta` (`delta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores bean items.' AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores bean items.' AUTO_INCREMENT=40 ;
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `bean_revision` (
   `changed` int(11) NOT NULL DEFAULT '0' COMMENT 'The Unix timestamp when the entity was most recently saved.',
   PRIMARY KEY (`vid`),
   KEY `bid` (`bid`,`vid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores bean items.' AUTO_INCREMENT=113 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores bean items.' AUTO_INCREMENT=185 ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `block` (
   PRIMARY KEY (`bid`),
   UNIQUE KEY `tmd` (`theme`,`module`,`delta`),
   KEY `list` (`theme`,`status`,`region`,`weight`,`module`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores block settings, such as region and visibility...' AUTO_INCREMENT=197 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores block settings, such as region and visibility...' AUTO_INCREMENT=209 ;
 
 -- --------------------------------------------------------
 
@@ -581,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `captcha_sessions` (
   `attempts` int(11) NOT NULL DEFAULT '0' COMMENT 'The number of attempts.',
   PRIMARY KEY (`csid`),
   KEY `csid_ip` (`csid`,`ip_address`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores the data about CAPTCHA sessions (solution, IP...' AUTO_INCREMENT=85 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores the data about CAPTCHA sessions (solution, IP...' AUTO_INCREMENT=112 ;
 
 -- --------------------------------------------------------
 
@@ -634,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `comment_uid` (`uid`),
   KEY `comment_nid_language` (`nid`,`language`),
   KEY `comment_created` (`created`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores comments and associated data.' AUTO_INCREMENT=286 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores comments and associated data.' AUTO_INCREMENT=287 ;
 
 -- --------------------------------------------------------
 
@@ -874,7 +874,7 @@ CREATE TABLE IF NOT EXISTS `fieldable_panels_panes_revision` (
   `vuuid` char(36) DEFAULT '' COMMENT 'The Universally Unique Identifier.',
   PRIMARY KEY (`vid`),
   KEY `fpid` (`fpid`,`vid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Entity revision table for panel pane content with fields.' AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Entity revision table for panel pane content with fields.' AUTO_INCREMENT=79 ;
 
 -- --------------------------------------------------------
 
@@ -905,7 +905,7 @@ CREATE TABLE IF NOT EXISTS `field_config` (
   KEY `storage_module` (`storage_module`),
   KEY `type` (`type`),
   KEY `storage_type` (`storage_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -924,7 +924,7 @@ CREATE TABLE IF NOT EXISTS `field_config_instance` (
   PRIMARY KEY (`id`),
   KEY `field_name_bundle` (`field_name`,`entity_type`,`bundle`),
   KEY `deleted` (`deleted`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 -- --------------------------------------------------------
 
@@ -1219,6 +1219,32 @@ CREATE TABLE IF NOT EXISTS `field_data_field_text` (
   KEY `language` (`language`),
   KEY `field_text_format` (`field_text_format`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Data storage for field 8 (field_text)';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `field_data_field_url_for_partner`
+--
+
+CREATE TABLE IF NOT EXISTS `field_data_field_url_for_partner` (
+  `entity_type` varchar(128) NOT NULL DEFAULT '' COMMENT 'The entity type this data is attached to',
+  `bundle` varchar(128) NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned DEFAULT NULL COMMENT 'The entity revision id this data is attached to, or NULL if the entity type is not versioned',
+  `language` varchar(32) NOT NULL DEFAULT '' COMMENT 'The language for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_url_for_partner_url` varchar(2048) DEFAULT NULL,
+  `field_url_for_partner_title` varchar(255) DEFAULT NULL,
+  `field_url_for_partner_attributes` mediumtext,
+  PRIMARY KEY (`entity_type`,`entity_id`,`deleted`,`delta`,`language`),
+  KEY `entity_type` (`entity_type`),
+  KEY `bundle` (`bundle`),
+  KEY `deleted` (`deleted`),
+  KEY `entity_id` (`entity_id`),
+  KEY `revision_id` (`revision_id`),
+  KEY `language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Data storage for field 15 (field_url_for_partner)';
 
 -- --------------------------------------------------------
 
@@ -1562,6 +1588,32 @@ CREATE TABLE IF NOT EXISTS `field_revision_field_text` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `field_revision_field_url_for_partner`
+--
+
+CREATE TABLE IF NOT EXISTS `field_revision_field_url_for_partner` (
+  `entity_type` varchar(128) NOT NULL DEFAULT '' COMMENT 'The entity type this data is attached to',
+  `bundle` varchar(128) NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `language` varchar(32) NOT NULL DEFAULT '' COMMENT 'The language for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_url_for_partner_url` varchar(2048) DEFAULT NULL,
+  `field_url_for_partner_title` varchar(255) DEFAULT NULL,
+  `field_url_for_partner_attributes` mediumtext,
+  PRIMARY KEY (`entity_type`,`entity_id`,`revision_id`,`deleted`,`delta`,`language`),
+  KEY `entity_type` (`entity_type`),
+  KEY `bundle` (`bundle`),
+  KEY `deleted` (`deleted`),
+  KEY `entity_id` (`entity_id`),
+  KEY `revision_id` (`revision_id`),
+  KEY `language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Revision archive storage for field 15 (field_url_for...';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `field_revision_taxonomy_wp_blog_tags`
 --
 
@@ -1604,7 +1656,7 @@ CREATE TABLE IF NOT EXISTS `file_managed` (
   KEY `uid` (`uid`),
   KEY `status` (`status`),
   KEY `timestamp` (`timestamp`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores information for uploaded files.' AUTO_INCREMENT=442 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores information for uploaded files.' AUTO_INCREMENT=446 ;
 
 -- --------------------------------------------------------
 
@@ -1673,7 +1725,7 @@ CREATE TABLE IF NOT EXISTS `flood` (
   PRIMARY KEY (`fid`),
   KEY `allow` (`event`,`identifier`,`timestamp`),
   KEY `purge` (`expiration`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...' AUTO_INCREMENT=160 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...' AUTO_INCREMENT=212 ;
 
 -- --------------------------------------------------------
 
@@ -1788,7 +1840,7 @@ CREATE TABLE IF NOT EXISTS `menu_links` (
   KEY `menu_plid_expand_child` (`menu_name`,`plid`,`expanded`,`has_children`),
   KEY `menu_parents` (`menu_name`,`p1`,`p2`,`p3`,`p4`,`p5`,`p6`,`p7`,`p8`,`p9`),
   KEY `router_path` (`router_path`(128))
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contains the individual links within a menu.' AUTO_INCREMENT=844 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contains the individual links within a menu.' AUTO_INCREMENT=1150 ;
 
 -- --------------------------------------------------------
 
@@ -1859,7 +1911,7 @@ CREATE TABLE IF NOT EXISTS `node` (
   KEY `tnid` (`tnid`),
   KEY `translate` (`translate`),
   KEY `language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='The base table for nodes.' AUTO_INCREMENT=426 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='The base table for nodes.' AUTO_INCREMENT=428 ;
 
 -- --------------------------------------------------------
 
@@ -1917,7 +1969,7 @@ CREATE TABLE IF NOT EXISTS `node_revision` (
   PRIMARY KEY (`vid`),
   KEY `nid` (`nid`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores information about each saved version of a node.' AUTO_INCREMENT=426 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores information about each saved version of a node.' AUTO_INCREMENT=428 ;
 
 -- --------------------------------------------------------
 
@@ -2192,7 +2244,7 @@ CREATE TABLE IF NOT EXISTS `panels_pane` (
   `uuid` char(36) DEFAULT NULL,
   PRIMARY KEY (`pid`),
   KEY `did_idx` (`did`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=184 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=195 ;
 
 -- --------------------------------------------------------
 
@@ -2239,7 +2291,7 @@ CREATE TABLE IF NOT EXISTS `queue` (
   PRIMARY KEY (`item_id`),
   KEY `name_created` (`name`,`created`),
   KEY `expire` (`expire`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores items in queues.' AUTO_INCREMENT=802 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores items in queues.' AUTO_INCREMENT=1088 ;
 
 -- --------------------------------------------------------
 
@@ -2416,7 +2468,7 @@ CREATE TABLE IF NOT EXISTS `semaphore` (
 CREATE TABLE IF NOT EXISTS `sequences` (
   `value` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The value of the sequence.',
   PRIMARY KEY (`value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores IDs.' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores IDs.' AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 
@@ -2643,7 +2695,7 @@ CREATE TABLE IF NOT EXISTS `url_alias` (
   PRIMARY KEY (`pid`),
   KEY `alias_language_pid` (`alias`,`language`,`pid`),
   KEY `source_language_pid` (`source`,`language`,`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='A list of URL aliases for Drupal paths; a user may visit...' AUTO_INCREMENT=436 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='A list of URL aliases for Drupal paths; a user may visit...' AUTO_INCREMENT=440 ;
 
 -- --------------------------------------------------------
 
@@ -2758,7 +2810,7 @@ CREATE TABLE IF NOT EXISTS `watchdog` (
   KEY `type` (`type`),
   KEY `uid` (`uid`),
   KEY `severity` (`severity`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.' AUTO_INCREMENT=5547 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.' AUTO_INCREMENT=7937 ;
 
 -- --------------------------------------------------------
 
