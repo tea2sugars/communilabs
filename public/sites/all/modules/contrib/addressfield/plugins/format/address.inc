@@ -63,7 +63,7 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
   $format['locality_block']['postal_code'] = array(
     '#title' => t('Postal code'),
     '#size' => 10,
-    '#required' => TRUE,
+    '#required' => FALSE,
     '#attributes' => array(
       'class' => array('postal-code'),
       'x-autocompletetype' => 'postal-code',
@@ -94,8 +94,14 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
     '#weight' => 100,
   );
 
-  // Those countries do not seem to have a relevant postal code.
-  static $countries_no_postal_code = array('AF', 'AG', 'AL', 'AO', 'BB', 'BI', 'BJ', 'BO', 'BS', 'BW', 'BZ', 'CF', 'CG', 'CM', 'CO', 'DJ', 'DM', 'EG', 'ER', 'FJ', 'GD', 'GH', 'GM', 'GQ', 'GY', 'HK', 'IE', 'KI', 'KM', 'KP', 'KY', 'LC', 'LY', 'ML', 'MR', 'NA', 'NR', 'RW', 'SB', 'SC', 'SL', 'SR', 'ST', 'TD', 'TG', 'TL', 'TO', 'TT', 'TV', 'TZ', 'UG', 'VC', 'VU', 'WS', 'ZW');
+  // These countries do not use postal codes.
+  $countries_no_postal_code = array(
+    'AO', 'AE', 'AF', 'AG', 'AI', 'BF', 'BI', 'BJ', 'BO', 'BS', 'BW', 'BZ', 'CD',
+    'CF', 'CG', 'CI', 'CM', 'CO', 'DJ', 'DM', 'ER', 'FJ', 'GD', 'GH', 'GM', 'GQ',
+    'GY', 'HK', 'IE', 'JM', 'KI', 'KM', 'KN', 'KP', 'LC', 'LY', 'ML', 'MO', 'MR',
+    'MW', 'NR', 'PA', 'QA', 'RW', 'SB', 'SC', 'SL', 'SR', 'ST', 'TD', 'TG', 'TL',
+    'TO', 'TV', 'TZ', 'UG', 'VU', 'ZW',
+  );
   if (in_array($address['country'], $countries_no_postal_code)) {
     unset($format['locality_block']['postal_code']);
 
@@ -105,8 +111,27 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
     unset($format['locality_block'][$first_child]['#prefix']);
   }
 
-  // Those countries generally use the administrative area in postal addresses.
-  static $countries_administrative_area = array('AR', 'AU', 'BR', 'BS', 'BY', 'BZ', 'CA', 'CN', 'DO', 'EG', 'ES', 'FJ', 'FM', 'GB', 'HN', 'ID', 'IE', 'IN', 'IT', 'JO', 'JP', 'KI', 'KN', 'KR', 'KW', 'KY', 'KZ', 'MX', 'MY', 'MZ', 'NG', 'NI', 'NR', 'NZ', 'OM', 'PA', 'PF', 'PG', 'PH', 'PR', 'PW', 'RU', 'SM', 'SO', 'SR', 'SV', 'TH', 'TW', 'UA', 'US', 'UY', 'VE', 'VI', 'VN', 'YU', 'ZA');
+  // These countries have required postal codes.
+  $countries_required_postal_code = array(
+    'AS', 'AT', 'AU', 'AX', 'BE', 'BL', 'BR', 'CA', 'CH', 'CN', 'DE', 'DK', 'ES',
+    'FI', 'FK', 'FM', 'FR', 'GB', 'GF', 'GG', 'GL', 'GP', 'GR', 'GS', 'GU', 'IM',
+    'IN', 'IO', 'IT', 'JE', 'JP', 'KR', 'LI', 'LU', 'MF', 'MH', 'MP', 'MQ', 'MX',
+    'MY', 'NC', 'NL', 'NO', 'NZ', 'PF', 'PL', 'PM', 'PN', 'PR', 'PT', 'PW', 'RE',
+    'RU', 'SE', 'SG', 'SH', 'SJ', 'SM', 'TC', 'TR', 'TW', 'UA', 'US', 'VI', 'WF',
+    'YT', 'ZA',
+  );
+  if (in_array($address['country'], $countries_required_postal_code)) {
+    $format['locality_block']['postal_code']['#required'] = TRUE;
+  }
+
+  // These countries use the administrative area in postal addresses.
+  $countries_administrative_area = array(
+    'AE', 'AM', 'AR', 'AU', 'BR', 'BS', 'BY', 'CA', 'CL', 'CN', 'CO', 'CV', 'EG',
+    'ES', 'FM', 'GB', 'HK', 'HN', 'ID', 'IE', 'IN', 'IT', 'IQ', 'IR', 'JP', 'KI',
+    'KN', 'KR',  'KY', 'KZ', 'JM', 'MN', 'MX', 'MY', 'MZ', 'NG', 'NI', 'NR', 'NZ',
+    'PA', 'PE', 'PF', 'PG', 'PH', 'PW', 'RU', 'SC', 'SO', 'SR', 'SV', 'TH', 'TR',
+    'TV', 'TW', 'UA', 'US', 'UY', 'UZ', 'VE', 'VI', 'VN',
+  );
   if (in_array($address['country'], $countries_administrative_area)) {
     $format['locality_block']['administrative_area'] = array(
       '#title' => t('State', array(), array('context' => 'Territory of a country')),
@@ -133,7 +158,7 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
       'CO' => t('Colorado'),
       'CT' => t('Connecticut'),
       'DE' => t('Delaware'),
-      'DC' => t('District Of Columbia'),
+      'DC' => t('District of Columbia'),
       'FL' => t('Florida'),
       'GA' => t('Georgia'),
       'HI' => t('Hawaii'),
@@ -201,7 +226,7 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
       'AG' => t('Agrigento'),
       'AL' => t('Alessandria'),
       'AN' => t('Ancona'),
-      'AO' => t("Valle d'Aosta/Vallée d'Aoste"),
+      'AO' => t('Aosta'),
       'AP' => t('Ascoli Piceno'),
       'AQ' => t("L'Aquila"),
       'AR' => t('Arezzo'),
@@ -276,8 +301,8 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
       'PV' => t('Pavia'),
       'PZ' => t('Potenza'),
       'RA' => t('Ravenna'),
-      'RC' => t('Reggio di Calabria'),
-      'RE' => t("Reggio nell'Emilia"),
+      'RC' => t('Reggio Calabria'),
+      'RE' => t('Reggio Emilia'),
       'RG' => t('Ragusa'),
       'RI' => t('Rieti'),
       'RM' => t('Roma'),
@@ -308,6 +333,64 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
       'VS' => t('Medio Campidano'),
       'VT' => t('Viterbo'),
       'VV' => t('Vibo Valentia'),
+    );
+    $format['locality_block']['administrative_area']['#title'] = t('Province');
+  }
+  else if ($address['country'] == 'ES') {
+    $format['locality_block']['administrative_area']['#options'] = array(
+      '' => t('--'),
+      'C' => t("A Coruña"),
+      'VI' => t('Alava'),
+      'AB' => t('Albacete'),
+      'A' => t('Alicante'),
+      'AL' => t("Almería"),
+      'O' => t('Asturias'),
+      'AV' => t("Ávila"),
+      'BA' => t('Badajoz'),
+      'PM' => t('Baleares'),
+      'B' => t('Barcelona'),
+      'BU' => t('Burgos'),
+      'CC' => t("Cáceres"),
+      'CA' => t("Cádiz"),
+      'S' => t('Cantabria'),
+      'CS' => t("Castellón"),
+      'CE' => t('Ceuta'),
+      'CR' => t('Ciudad Real'),
+      'CO' => t("Córdoba"),
+      'CU' => t('Cuenca'),
+      'GI' => t('Gerona'),
+      'GR' => t('Granada'),
+      'GU' => t('Guadalajara'),
+      'SS' => t("Guipúzcoa"),
+      'H' => t('Huelva'),
+      'HU' => t('Huesca'),
+      'J' => t("Jaén"),
+      'LO' => t('La Rioja'),
+      'GC' => t('Las Palmas'),
+      'LE' => t("León"),
+      'L' => t("Lérida"),
+      'LU' => t('Lugo'),
+      'M' => t('Madrid'),
+      'MA' => t("Málaga"),
+      'ML' => t('Melilla'),
+      'MU' => t('Murcia'),
+      'NA' => t('Navarra'),
+      'OR' => t('Ourense'),
+      'P' => t('Palencia'),
+      'PO' => t('Pontevedra'),
+      'SA' => t('Salamanca'),
+      'TF' => t('Santa Cruz de Tenerife'),
+      'SG' => t('Segovia'),
+      'SE' => t('Sevilla'),
+      'SO' => t('Soria'),
+      'T' => t('Tarragona'),
+      'TE' => t('Teruel'),
+      'TO' => t('Toledo'),
+      'V' => t('Valencia'),
+      'VA' => t('Valladolid'),
+      'BI' => t('Vizcaya'),
+      'ZA' => t('Zamora'),
+      'Z' => t('Zaragoza'),
     );
     $format['locality_block']['administrative_area']['#title'] = t('Province');
   }
@@ -452,9 +535,184 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
       'CIT' => t('Chatham Islands Territory'),
     );
   }
+  elseif ($address['country'] == 'MY') {
+    $format['locality_block']['administrative_area']['#options'] = array(
+      ''   => t('--'),
+      '01' => t('Johor'),
+      '02' => t('Kedah'),
+      '03' => t('Kelantan'),
+      '14' => t('Kuala Lumpur'),
+      '15' => t('Labuan'),
+      '04' => t('Melaka'),
+      '05' => t('Negeri Sembilan'),
+      '06' => t('Pahang'),
+      '08' => t('Perak'),
+      '09' => t('Perlis'),
+      '07' => t('Pulau Pinang'),
+      '16' => t('Putrajaya'),
+      '12' => t('Sabah'),
+      '13' => t('Sarawak'),
+      '10' => t('Selangor'),
+      '11' => t('Terengganu'),
+    );
+  }
+  else if ($address['country'] == 'MX') {
+    $format['locality_block']['administrative_area']['#options'] = array(
+      '' => t('--'),
+      'AGU' => t('Aguascalientes'),
+      'BCN' => t('Baja California'),
+      'BCS' => t('Baja California Sur'),
+      'CAM' => t('Campeche'),
+      'COA' => t('Coahuila'),
+      'COL' => t('Colima'),
+      'CHP' => t('Chiapas'),
+      'CHH' => t('Chihuahua'),
+      'DIF' => t('Distrito Federal'),
+      'DUG' => t('Durango'),
+      'MEX' => t('Estado de México'),
+      'GUA' => t('Guanajuato'),
+      'GRO' => t('Guerrero'),
+      'HID' => t('Hidalgo'),
+      'JAL' => t('Jalisco'),
+      'MIC' => t('Michoacán'),
+      'MOR' => t('Morelos'),
+      'NAY' => t('Nayarit'),
+      'NLE' => t('Nuevo León'),
+      'OAX' => t('Oaxaca'),
+      'PUE' => t('Puebla'),
+      'QUE' => t('Queretaro'),
+      'ROO' => t('Quintana Roo'),
+      'SLP' => t('San Luis Potosí'),
+      'SIN' => t('Sinaloa'),
+      'SON' => t('Sonora'),
+      'TAB' => t('Tabasco'),
+      'TAM' => t('Tamaulipas'),
+      'TLA' => t('Tlaxcala'),
+      'VER' => t('Veracruz'),
+      'YUC' => t('Yucatán'),
+      'ZAC' => t('Zacatecas'),
+    );
+  }
+  elseif ($address['country'] == 'IN') {
+    $format['locality_block']['administrative_area']['#options'] = array(
+      ''   => t('--'),
+      'AN' => t('Andaman & Nicobar'),
+      'AP' => t('Andhra Pradesh'),
+      'AR' => t('Arunachal Pradesh'),
+      'AS' => t('Assam'),
+      'BR' => t('Bihar'),
+      'CH' => t('Chandigarh'),
+      'CT' => t('Chhattisgarh'),
+      'DD' => t('Daman & Diu'),
+      'DL' => t('Delhi'),
+      'DN' => t('Dadra & Nagar Haveli'),
+      'GA' => t('Goa'),
+      'GJ' => t('Gujarat'),
+      'HP' => t('Himachal Pradesh'),
+      'HR' => t('Haryana'),
+      'JH' => t('Jharkhand'),
+      'JK' => t('Jammu & Kashmir'),
+      'KA' => t('Karnataka'),
+      'KL' => t('Kerala'),
+      'LD' => t('Lakshadweep'),
+      'MH' => t('Maharashtra'),
+      'MN' => t('Manipur'),
+      'ML' => t('Meghalaya'),
+      'MP' => t('Madhya Pradesh'),
+      'MZ' => t('Mizoram'),
+      'NL' => t('Nagaland'),
+      'OR' => t('Odisha'),
+      'PB' => t('Punjab'),
+      'PY' => t('Puducherry'),
+      'RJ' => t('Rajasthan'),
+      'SK' => t('Sikkim'),
+      'TN' => t('Tamil Nadu'),
+      'TR' => t('Tripura'),
+      'UP' => t('Uttar Pradesh'),
+      'UT' => t('Uttarakhand'),
+      'WB' => t('West Bengal'),
+    );
+    $format['locality_block']['administrative_area']['#title'] = t('State');
+  }
+  elseif ($address['country'] == 'PE') {
+    $format['locality_block']['administrative_area']['#options'] = array(
+      ''   => t('--'),
+      'AMA' => t('Amazonas'),
+      'ANC' => t('Ancash'),
+      'APU' => t('Apurimac'),
+      'ARE' => t('Arequipa'),
+      'AYA' => t('Ayacucho'),
+      'CAJ' => t('Cajamarca'),
+      'CAL' => t('Callao'),
+      'CUS' => t('Cusco'),
+      'HUV' => t('Huancavelica'),
+      'HUC' => t('Huanuco'),
+      'ICA' => t('Ica'),
+      'JUN' => t('Junin'),
+      'LAL' => t('La Libertad'),
+      'LAM' => t('Lambayeque'),
+      'LIM' => t('Lima'),
+      'LOR' => t('Loreto'),
+      'MDD' => t('Madre de Dios'),
+      'MOQ' => t('Moquegua'),
+      'PAS' => t('Pasco'),
+      'PIU' => t('Piura'),
+      'PUN' => t('Puno'),
+      'SAM' => t('San Martin'),
+      'TAC' => t('Tacna'),
+      'TUM' => t('Tumbes'),
+      'UCA' => t('Ucayali'),
+    );
+    $format['locality_block']['administrative_area']['#title'] = t('Department');
+    $format['locality_block']['locality']['#title'] = t('District');
+    $format['locality_block']['administrative_area']['#weight'] = 1;
+    $format['locality_block']['locality']['#weight'] = 2;
+  }
+  elseif ($address['country'] == 'ID') {
+    $format['locality_block']['administrative_area']['#options'] = array(
+      '' => t('--'),
+      'AC' => t('Aceh'),
+      'BA' => t('Bali'),
+      'BB' => t('Bangka Belitung'),
+      'BT' => t('Banten'),
+      'BE' => t('Bengkulu'),
+      'JK' => t('DKI Jakarta'),
+      'YO' => t('D.I. Yogyakarta'),
+      'GO' => t('Gorontalo'),
+      'JA' => t('Jambi'),
+      'JB' => t('Jawa Barat'),
+      'JT' => t('Jawa Tengah'),
+      'JI' => t('Jawa Timur'),
+      'KB' => t('Kalimantan Barat'),
+      'KS' => t('Kalimantan Selatan'),
+      'KT' => t('Kalimantan Tengah'),
+      'KI' => t('Kalimantan Timur'),
+      'KR' => t('Kepulauan Riau'),
+      'LA' => t('Lampung'),
+      'MA' => t('Maluku'),
+      'MU' => t('Maluku Utara'),
+      'NB' => t('Nusa Tenggara Barat'),
+      'NT' => t('Nusa Tenggara Timur'),
+      'PA' => t('Papua'),
+      'PB' => t('Papua Barat'),
+      'RI' => t('Riau'),
+      'SR' => t('Sulawesi Barat'),
+      'SN' => t('Sulawesi Selatan'),
+      'ST' => t('Sulawesi Tengah'),
+      'SG' => t('Sulawesi Tenggara'),
+      'SA' => t('Sulawesi Utara'),
+      'SB' => t('Sumatera Barat'),
+      'SS' => t('Sumatera Selatan'),
+      'SU' => t('Sumatera Utara'),
+    );
+    $format['locality_block']['administrative_area']['#render_option_value'] = TRUE;
+    $format['locality_block']['administrative_area']['#title'] = t('Province');
+    $format['locality_block']['administrative_area']['#weight'] = 1;
+    $format['locality_block']['locality']['#title'] = t('City/Regency');
+  }
 
   // Those countries tend to put the postal code after the locality.
-  static $countries_postal_code_after_locality = array('AU', 'BD', 'BF', 'BH', 'BM', 'BN', 'BT', 'CA', 'FM', 'GB', 'ID', 'IN', 'JM', 'JO', 'KH', 'LB', 'LS', 'LV', 'MM', 'MN', 'MV', 'MW', 'NG', 'NP', 'NZ', 'PE', 'PK', 'PR', 'PW', 'SA', 'SG', 'SO', 'TH', 'US', 'VI', 'VG', 'VN');
+  static $countries_postal_code_after_locality = array('AU', 'BD', 'BF', 'BH', 'BM', 'BN', 'BT', 'CA', 'FM', 'GB', 'ID', 'IN', 'JM', 'JO', 'KH', 'LB', 'LS', 'LV', 'MM', 'MN', 'MV', 'NG', 'NP', 'NZ', 'PK', 'PR', 'PW', 'SA', 'SG', 'SO', 'TH', 'US', 'VI', 'VG', 'VN');
   if (in_array($address['country'], $countries_postal_code_after_locality)) {
     // Take the widget out of the array.
     $postal_code_widget = $format['locality_block']['postal_code'];
@@ -506,6 +764,72 @@ function addressfield_format_address_generate(&$format, $address, $context = arr
         '#tag' => 'div',
       )
     );
+  }
+
+  // JP-specific tweaks
+  if ($address['country'] == 'JP') {
+    // Change the order.
+    $format['locality_block']['#weight'] = 10;
+    $format['locality_block']['#attributes']['class'][0] = 'addressfield-container';
+    $format['locality_block']['postal_code']['#weight'] = 10;
+    $format['locality_block']['postal_code']['#tag'] = 'div';
+    $format['locality_block']['postal_code']['#size'] = 30;
+    $format['locality_block']['administrative_area']['#title'] = t('Prefecture');
+    $format['locality_block']['administrative_area']['#weight'] = 20;
+    $format['locality_block']['administrative_area']['#size'] = 30;
+    $format['locality_block']['administrative_area']['#render_option_value'] = TRUE;
+    $format['locality_block']['administrative_area']['#options'] = array(
+      ''   => t('--'),
+      '01' => t('Hokkaido'),
+      '02' => t('Aomori'),
+      '03' => t('Iwate'),
+      '04' => t('Miyagi'),
+      '05' => t('Akita'),
+      '06' => t('Yamagata'),
+      '07' => t('Fukushima'),
+      '08' => t('Ibaraki'),
+      '09' => t('Tochigi'),
+      '10' => t('Gunma'),
+      '11' => t('Saitama'),
+      '12' => t('Chiba'),
+      '13' => t('Tokyo'),
+      '14' => t('Kanagawa'),
+      '15' => t('Niigata'),
+      '16' => t('Toyama'),
+      '17' => t('Ishikawa'),
+      '18' => t('Fukui'),
+      '19' => t('Yamanashi'),
+      '20' => t('Nagano'),
+      '21' => t('Gifu'),
+      '22' => t('Shizuoka'),
+      '23' => t('Aichi'),
+      '24' => t('Mie'),
+      '25' => t('Shiga'),
+      '26' => t('Kyoto'),
+      '27' => t('Osaka'),
+      '28' => t('Hyogo'),
+      '29' => t('Nara'),
+      '30' => t('Wakayama'),
+      '31' => t('Tottori'),
+      '32' => t('Shimane'),
+      '33' => t('Okayama'),
+      '34' => t('Hiroshima'),
+      '35' => t('Yamaguchi'),
+      '36' => t('Tokushima'),
+      '37' => t('Kagawa'),
+      '38' => t('Ehime'),
+      '39' => t('Kochi'),
+      '40' => t('Fukuoka'),
+      '41' => t('Saga'),
+      '42' => t('Nagasaki'),
+      '43' => t('Kumamoto'),
+      '44' => t('Oita'),
+      '45' => t('Miyazaki'),
+      '46' => t('Kagoshima'),
+      '47' => t('Okinawa'),
+    );
+    $format['locality_block']['locality']['#weight'] = 30;
+    $format['street_block']['#weight'] = 20;
   }
 
   if ($context['mode'] == 'form') {
