@@ -1,0 +1,8 @@
+name = Permissions
+description = Permission Setup
+core = 7.x
+package = Communilab
+version = 7.x-1.0-dev
+project = permissions
+features[features_api][] = api:2
+project path = sites/all/modules/features
