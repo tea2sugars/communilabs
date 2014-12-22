@@ -25,8 +25,6 @@ function permissions_user_default_permissions() {
   $permissions['access administration pages'] = array(
     'name' => 'access administration pages',
     'roles' => array(
-      'Forum Moderator' => 'Forum Moderator',
-      'Forum Super-User' => 'Forum Super-User',
       'administrator' => 'administrator',
     ),
     'module' => 'system',
@@ -73,7 +71,6 @@ function permissions_user_default_permissions() {
     'name' => 'access comments',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
@@ -748,7 +745,6 @@ function permissions_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       'Forum Moderator' => 'Forum Moderator',
-      'Forum Super-User' => 'Forum Super-User',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
@@ -815,6 +811,9 @@ function permissions_user_default_permissions() {
   $permissions['cancel account'] = array(
     'name' => 'cancel account',
     'roles' => array(
+      'Forum Member' => 'Forum Member',
+      'Forum Moderator' => 'Forum Moderator',
+      'Forum Super-User' => 'Forum Super-User',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
@@ -1881,7 +1880,6 @@ function permissions_user_default_permissions() {
     'name' => 'post comments',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
@@ -2117,7 +2115,6 @@ function permissions_user_default_permissions() {
     'name' => 'use text format filtered_html',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'filter',
