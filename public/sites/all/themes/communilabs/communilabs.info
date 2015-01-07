@@ -359,3 +359,4 @@ css[global.css.less][options][weight] = '10'
 settings[alpha_css][global.css.less] = 'global.css.less'
 
 plugins[panels][layouts] = panels/layouts
+plugins[advanced_forum][styles] = 'advanced-forum/styles/naked'

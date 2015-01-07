@@ -106,7 +106,6 @@ Colors used:
 /* Active column on both tables - reset to prevent bleed thru from theme */
 .forum-table tr.even td.active,
 .forum-table tr.odd td.active{
-  background-color: transparent;
 }
 
 /* Individual cells on both tables */
