@@ -472,6 +472,7 @@ span.follow-link-wrapper a {
 /*Buttons*/
 .node-links ul li a {
 			.button_large;
+			
 }
 
 .comment-links ul li a {
@@ -906,7 +907,55 @@ iframe {
 			
 		}
 	}
+	.tabs {
+		li {
+			
+			a {
+				background:		@colorTeal;
+				border:none;
+				-webkit-border-top-left-radius: 	5px;
+				-webkit-border-top-right-radius: 	5px;
+				-moz-border-radius-topleft: 		5px;
+				-moz-border-radius-topright: 		5px;
+				border-top-left-radius: 			5px;
+				border-top-right-radius: 			5px;
+				color: 								white;
+				display: 							inline-block;
+				padding:							5px;
+				&:hover {
+					background: @colorTealDark;
+					color:			white;
+				}
+				
+			}
+			a.active {
+				background: @colorTealDark;
+				border:		none;
+				}
+			
+		}
+	}
 }
+
+.forum-node-create-links-top {
+	.af-button-large {
+			.button_large;
+			margin-bottom:10px;
+			display:block;
+	}
+}
+
+.forum-node-create-links {
+	width:100%;
+	margin:0 0 10px 0;
+	float:left;
+		.af-button-large {
+			.button_large;
+			margin-bottom:10px;
+			display:block;
+	}
+}
+
 
 /*Forum theme work - copied and edited from the Advanced Forum Naked Theme*/
 
