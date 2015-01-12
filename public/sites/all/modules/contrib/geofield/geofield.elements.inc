@@ -367,13 +367,10 @@ function theme_geofield_latlon($vars) {
  * Returns options for radius of the Earth.
  */
 
+/*Hacked this to remove options - RB */
 function geofield_radius_options() {
   return array(
     GEOFIELD_KILOMETERS => t('Kilometers'),
-    GEOFIELD_METERS => t('Meters'),
     GEOFIELD_MILES => t('Miles'),
-    GEOFIELD_YARDS => t('Yards'),
-    GEOFIELD_FEET => t('Feet'),
-    GEOFIELD_NAUTICAL_MILES => t('Nautical Miles'),
   );
 }
