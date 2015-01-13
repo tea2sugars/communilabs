@@ -1,4 +1,4 @@
-<div class="panel-display omega-grid communilabs_homepage_new" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display omega-grid communilabs-homepage-new" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
 <div class="homepage_image_wrapper clear" id="header-image">
   <div class="panel-panel grid-12">

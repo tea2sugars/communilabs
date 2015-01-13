@@ -3,13 +3,13 @@
 /**
  * Implements hook_panels_layouts().
  */
-function communilabs_communilabs_homepage_new_panels_layouts() {
-  $items['communilabs_homepage_new'] = array(
+function communilabs-communilabs-homepage-new-panels-layouts() {
+  $items['communilabs-homepage-new'] = array(
     'title' => t('Communilabs Homepage New'),
     'category' => t('Communilabs: Brickwork'),
-    'icon' => 'communilabs_homepage_new.png',
-    'theme' => 'communilabs_homepage_new',
-	'admin css' => 'communilabs_homepage_new.css',
+    'icon' => 'communilabs-homepage-new.png',
+    'theme' => 'communilabs-homepage-new',
+	'admin css' => 'communilabs-homepage-new.css',
     'regions' => array(
       'header' => t('Header'),
       'news-1' => t('News-1'),
