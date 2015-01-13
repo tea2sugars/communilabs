@@ -19,6 +19,9 @@ class FeedImport {
 
   // Entity info cache.
   protected static $entityInfo = array();
+  
+  // Default compare function.
+  
 
   /**
    * Gets info about an entity.
@@ -96,6 +99,8 @@ class FeedImport {
             'column' => key($field_info['columns']),
             'columns' => array_keys($field_info['columns']),
             'cardinality' => $field_info['cardinality'],
+            'type' => $field_info['type'],
+            'module' => $field_info['module'],
           );
         }
       }
@@ -105,10 +110,18 @@ class FeedImport {
       // Get properties info.
       $prop_info = entity_get_property_info($entity_name);
       if (isset($prop_info['properties'])) {
-        $info->properties = array_diff(
-          array_keys($prop_info['properties']),
-          array_keys($info->fields)
-        );
+        foreach ($prop_info['properties'] as $pname => $pval) {
+          if (isset($pval['schema field'])) {
+            $pval = $pval['schema field'];
+          }
+          else {
+            $pval = $pname;
+          }
+          if (!isset($info->fields[$pval])) {
+            $info->properties[] = $pval;
+          }
+        }
+        $info->properties = array_unique($info->properties);
       }
     }
     elseif (isset($entity['schema_fields_sql']['base table'])) {
@@ -140,6 +153,9 @@ class FeedImport {
     }
     return static::$entityNames;
   }
+
+  // Default field compare function.
+  public static $defaultFieldCompareFunction = '_feed_import_base_compare_other_fields';
 
   /**
    * Sets processor settings.
@@ -174,7 +190,10 @@ class FeedImport {
 
     $ok = $ok && $fi->setHashManager($hm);
     $ok = $ok && $fi->setUniq($s['uniq_path']);
-    $ok = $ok && $fi->setFields($s['fields'], $s['static_fields']);
+    $ok = $ok && $fi->setFields($s['fields'], $s['static_fields'],
+                                static::getFieldsCompareFunctions(),
+                                static::getMergeFieldClasses(),
+                                static::$defaultFieldCompareFunction);
 
     $ok = $ok && $fi->setCustomSettings(array_diff_key($s, array(
       'uniq_path' => 1, 'processor' => 1, 'reader' => 1, 'hashes' => 1,
@@ -183,6 +202,47 @@ class FeedImport {
     )));
 
     return $ok ? TRUE : $fi->getErrors();
+  }
+  
+  /**
+   * Returns field compare functions.
+   */
+  public static function getFieldsCompareFunctions() {
+    $funcs = module_invoke_all('feed_import_field_compare_functions');
+    foreach ($funcs as $type => &$f) {
+      if (is_array($f)) {
+        for ($i = 0, $max = count($f); $i < $max; $i++) {
+          if (is_callable($f[$i]))  {
+            $f = $f[$i];
+            continue 2;
+          }
+        }
+        unset($funcs[$type]);
+      }
+      elseif (!is_callable($f)) {
+        unset($funcs[$type]); 
+      }
+    }
+    return $funcs;
+  }
+
+  /**
+   * Gets the classes used to merge field values.
+   *
+   * @return array
+   *    An array of classes keyed by merge mode.
+   */
+  public static function getMergeFieldClasses() {
+    $classes = module_invoke_all('feed_import_field_merge_classes');
+    foreach ($classes as $key => &$class) {
+      if (isset($class['class'])) {
+        $class = $class['class'];
+      }
+      else {
+        unset($classes[$key]);
+      }
+    }
+    return $classes;
   }
 
   // A list of all feeds configuration.
@@ -281,6 +341,7 @@ class FeedImport {
             'reset_cache' => 100,
             'break_on_undefined_filter' => TRUE,
             'skip_defined_functions_check' => FALSE,
+            'updates_only' => FALSE,
           ),
         ),
         'reader' => array(
@@ -512,6 +573,8 @@ class FeedImportProcessor extends FeedImportConfigurable {
   const UPDATE_MERGE = 1;
   // Overwrite
   const UPDATE_OVERWRITE = 2;
+  // Overwrite fast
+  const UPDATE_OVERWRITE_FAST = 3;
 
   // No field value actions.
   const ACTION_DEFAULT_VALUE = 0;
@@ -548,6 +611,8 @@ class FeedImportProcessor extends FeedImportConfigurable {
   protected $machineName;
   // Flag to skip imported items.
   protected $skipImportedItems = FALSE;
+  // Flag to only apply updates.
+  protected $updatesOnly = FALSE;
   // Entity info.
   protected $entityInfo;
   // Current reader.
@@ -596,6 +661,8 @@ class FeedImportProcessor extends FeedImportConfigurable {
   public $current;
   // Current prefiltered values.
   public $prefilteredValue;
+  // Callback to alter uniq value
+  protected $uniqAlter = FALSE;
 
   /**
    * Constructor.
@@ -716,6 +783,9 @@ class FeedImportProcessor extends FeedImportConfigurable {
     if (isset($options['break_on_undefined_filter'])) {
       $this->breakOnUndefinedFilter = (bool) $options['break_on_undefined_filter'];
     }
+    if (isset($options['updates_only'])) {
+      $this->updatesOnly = (bool) $options['updates_only'];
+    }
     
     $cbks = array(
       'before_combine' => &$this->beforeCombine,
@@ -723,6 +793,7 @@ class FeedImportProcessor extends FeedImportConfigurable {
       'before_create'  => &$this->beforeCreate,
       'before_save'    => &$this->beforeSave,
       'after_save'     => &$this->afterSave,
+      'uniq_callback'     => &$this->uniqAlter,
     );
     
     foreach ($cbks as $opt => &$val) {
@@ -838,17 +909,41 @@ class FeedImportProcessor extends FeedImportConfigurable {
    *     List of dynamic fields
    * @param array $static_fields
    *     List of static fields
+   * @param array $compare_functions
+   *     List of compare functions
+   * @param string $default_compare
+   *     Default compare function
    *
    * @return boolean
    *     TRUE if fields were set
    */
-  public function setFields(array $fields = array(), array $static_fields = array()) {
+  public function setFields(array $fields = array(), array $static_fields = array(), array $compare_functions = array(), array $merge_classes = array(), $default_compare = '_feed_import_base_compare_other_fields') {
 
     // Check for requirements.
     if (!$this->entityInfo || !$this->reader || !$this->filters || !empty($this->baseEntity)) {
       $this->addError('Could not set fields because there are missing dependencies or fields were already added');
       return FALSE;
     }
+    
+    // Create default merge
+    if (!isset($merge_classes[static::UPDATE_COMBINE])) {
+      $this->addError(sprintf('Merge field default class found!'));
+      return FALSE;
+    }
+    $class = $merge_classes[static::UPDATE_COMBINE];
+    if (!class_exists($class)) {
+      $this->addError(sprintf('Merge field default class %s was not found!', $class));
+      return FALSE;
+    }
+    elseif (!is_subclass_of($class, 'FeedImportMergeField')) {
+      $this->addError(sprintf(
+        'Merge field default class %s must extend % class!',
+        $class,
+        'FeedImportMergeField'
+      ));
+      return FALSE;
+    }
+    $merge_classes[static::UPDATE_COMBINE] = new $class();
 
     // Create format paths callback.
     $fp = array($this->reader, 'formatPath');
@@ -864,7 +959,53 @@ class FeedImportProcessor extends FeedImportConfigurable {
 
       // Set field info.
       $this->fieldsInfo[$f['field']] = &$f;
+      
+      if (!isset($merge_classes[$f['update_mode']])) {
+        $this->addError(sprintf('No field merge class found for field %s!', $f['field']));
+        return FALSE;
+      }
+      
+      if (is_string($merge_classes[$f['update_mode']])) {
+        $class = $merge_classes[$f['update_mode']];
+        if (!class_exists($class)) {
+          $this->addError(sprintf(
+            'Merge field class %s for field %s was not found!',
+            $class,
+            $f['field']
+          ));
+          return FALSE;
+        }
+        elseif (!is_subclass_of($class, 'FeedImportMergeField')) {
+          $this->addError(sprintf(
+            'Merge field class %s for field %s must extend % class!',
+            $class,
+            $f['field'],
+            'FeedImportMergeField'
+          ));
+          return FALSE;
+        }
+        $merge_classes[$f['update_mode']] = new $class();
+      }
+      
+      $f['update_mode'] = $merge_classes[$f['update_mode']];
+      $f['overwrite'] = $f['update_mode']->overwriteEmpty();
+      
+      // Add cardinality
+      $f['cardinality'] = isset($this->entityInfo->fields[$f['field']]['cardinality'])
+                            ? $this->entityInfo->fields[$f['field']]['cardinality']
+                            : 1;
 
+      // Add compare function
+      if ($f['column']) {
+        $f['compare'] = $this->entityInfo->fields[$f['field']]['module'] . ':' . $this->entityInfo->fields[$f['field']]['type'];
+        if (isset($compare_functions[$f['compare']])) {
+          $f['compare'] = $compare_functions[$f['compare']];
+        }
+        else {
+          $f['compare'] = $default_compare;
+        }
+      }
+      
       // Check if column must be guessed.
       if ($f['column'] === TRUE && isset($this->entityInfo->fields[$f['field']])) {
         $f['column'] = $this->entityInfo->fields[$f['field']]['column'];
@@ -935,7 +1076,9 @@ class FeedImportProcessor extends FeedImportConfigurable {
           $this->fieldsInfo[$f] = array(
             'field' => $f,
             'column' => FALSE,
-            'update_mode' => static::UPDATE_COMBINE,
+            'update_mode' => $merge_classes[static::UPDATE_COMBINE],
+            'overwrite' => $merge_classes[static::UPDATE_COMBINE]->overwriteEmpty(),
+            'cardinality' => 1,
           );
         }
         $this->baseEntity[$f] = $value;
@@ -946,7 +1089,10 @@ class FeedImportProcessor extends FeedImportConfigurable {
           'field' => $f,
           'column' => isset($this->entityInfo->fields[$f]) ?
                       $this->entityInfo->fields[$f]['column'] : 'value',
-          'update_mode' => static::UPDATE_COMBINE,
+          'update_mode' => $merge_classes[static::UPDATE_COMBINE],
+          'overwrite' => $merge_classes[static::UPDATE_COMBINE]->overwriteEmpty(),
+          'cardinality' => isset($this->entityInfo->fields[$f]['cardinality']) ?
+                            $this->entityInfo->fields[$f]['cardinality'] : 1,
         );
       }
     }
@@ -1046,6 +1192,10 @@ class FeedImportProcessor extends FeedImportConfigurable {
       if (!is_array($value)) {
         $value = array($value);
       }
+      elseif ($field['cardinality'] != -1 && ($cnt = count($value)) > $field['cardinality']) {
+        // Remove extra values.
+        array_splice($value, $field['cardinality'], $cnt - $field['cardinality'], NULL);
+      }
 
       // Set field properties.
       if ($st) {
@@ -1111,6 +1261,10 @@ class FeedImportProcessor extends FeedImportConfigurable {
       if (is_array($uniq)) {
         $uniq = isset($uniq[0]) ? $uniq[0] : reset($uniq);
       }
+      // Check if uniq alter callback exists.
+      if ($this->uniqAlter) {
+        $uniq = call_user_func($this->uniqAlter, $uniq);
+      }
       // Create hash.
       $entity[static::TEMP_HASH] = $this->hashes->hash($uniq);
     }
@@ -1141,6 +1295,9 @@ class FeedImportProcessor extends FeedImportConfigurable {
           }
           // We matched one path.
           break;
+        }
+        else {
+          $val = NULL;
         }
       }
       // Check if default action is needed.
@@ -1208,9 +1365,6 @@ class FeedImportProcessor extends FeedImportConfigurable {
 
     // Compare fields from entities.
     foreach ($this->fieldsInfo as &$field) {
-      // Get update mode.
-      $overwrite = $field['update_mode'] == static::UPDATE_OVERWRITE;
-
       // Get field name and column.
       $fn = &$field['field'];
       $fc = &$field['column'];
@@ -1219,64 +1373,19 @@ class FeedImportProcessor extends FeedImportConfigurable {
         // It is a field
         if (isset($new[$fn][$lang])) {
           if (isset($curr->{$fn}[$lang])) {
-            // Get a ref to use short names.
-            $en = &$new[$fn][$lang];
-            $ec = &$curr->{$fn}[$lang];
-
-            // Check if overwrite is enabled
-            if ($overwrite) {
-              if ($ec != $en) {
-                $ec = $en;
-                $changed = TRUE;
-              }
-              unset($ec, $en);
-              continue;
-            }
-
-            // Check if duplicate field values are allowed.
-            if ($field['update_mode'] == static::UPDATE_MERGE) {
-              $ec = array_merge($ec, $en);
+            if ($field['update_mode']->merge($curr->{$fn}[$lang], $new[$fn][$lang], $field)) {
               // Mark as changed.
               $changed = TRUE;
-              unset($ec, $en);
-              continue;
             }
-
-            // Well, we must search to see if item already exists.
-            $cnt = count($ec);
-            while ($en) {
-              $val = array_shift($en);
-              // Check if already exists.
-              $add = TRUE;
-              for ($i = 0; $i < $cnt; $i++) {
-                // Compare by key-value.
-                if (!array_diff_assoc($val, $ec[$i])) {
-                  $add = FALSE;
-                  break;
-                }
-              }
-              // Do not exists so add it.
-              if ($add) {
-                $ec[] = $val;
-                $cnt++;
-                // Mark as changed.
-                $changed = TRUE;
-              }
-            }
-
-            // Remove refs.
-            unset($en, $ec);
           }
-          elseif ($overwrite) {
+          else {
             // Overwrite.
             $curr->{$fn}[$lang] = $new[$fn][$lang];
             // Mark as changed.
             $changed = TRUE;
           }
-          // Remove from memory.
-          unset($new[$fn]);
         }
-        elseif ($overwrite && isset($curr->{$fn}[$lang])) {
+        elseif ($field['overwrite'] && isset($curr->{$fn}[$lang])) {
           // Forced update mode.
           unset($curr->{$fn}[$lang]);
           // Don't leave an empty property.
@@ -1301,7 +1410,7 @@ class FeedImportProcessor extends FeedImportConfigurable {
           // Remove from memory.
           unset($new[$fn]);
         }
-        elseif ($overwrite && isset($curr->{$fn})) {
+        elseif ($field['overwrite'] && isset($curr->{$fn})) {
           // Forced update mode is selected.
           unset($curr->{$fn});
           // Mark as changed.
@@ -1471,7 +1580,11 @@ class FeedImportProcessor extends FeedImportConfigurable {
         unset($ids[$hash], $current, $entity, $hash);
       }
       else {
-        
+        // Check if this imports accepts only updates.
+        if ($this->updatesOnly) {
+          $this->report['skipped']++;
+          goto UNSET_E_VARS;
+        }
         // Check before save callback
         if ($beforeCreate) {
           switch ($beforeCreate($entity)) {
