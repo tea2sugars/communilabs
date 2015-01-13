@@ -1,0 +1,14 @@
+name = Forum Rules
+core = 7.x
+package = Communilab
+version = 7.x-1.0-Dev
+project = forum_rules
+dependencies[] = comment
+dependencies[] = entity
+dependencies[] = privatemsg_rules
+dependencies[] = rules
+features[features_api][] = api:2
+features[rules_config][] = rules_comment_authorisation
+features[rules_config][] = rules_forum_report
+features[rules_config][] = rules_private_message_conclude
+features[rules_config][] = rules_register_user_notification
