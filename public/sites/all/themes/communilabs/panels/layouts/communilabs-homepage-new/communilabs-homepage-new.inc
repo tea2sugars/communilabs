@@ -3,7 +3,7 @@
 /**
  * Implements hook_panels_layouts().
  */
-function communilabs-communilabs-homepage-new-panels-layouts() {
+function communilabs_communilabs_homepage_new_panels_layouts() {
   $items['communilabs-homepage-new'] = array(
     'title' => t('Communilabs Homepage New'),
     'category' => t('Communilabs: Brickwork'),
