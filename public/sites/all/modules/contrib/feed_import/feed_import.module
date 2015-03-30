@@ -566,8 +566,7 @@ function feed_import_feed_import_reader_info() {
         '#default_value' => ',',
         '#maxlength' => 1,
         '#size' => 1,
-        '#element_validate' => 'feed_import_element_validate_not_empty',
-        //'#required' => TRUE,
+        '#required' => TRUE,
       ),
       'enclosure' => array(
         '#type' => 'textfield',
@@ -646,14 +645,6 @@ function feed_import_feed_import_processor_info() {
           '#default_value' => FALSE,
           '#description' => t('This is possible only when items are monitored.'),
         ),
-        'updates_only' => array(
-          '#type' => 'checkbox',
-          '#title' => t('Only update already imported items'),
-          '#default_value' => FALSE,
-          '#description' => t('Using this option no new entity will be created.') . ' ' .
-                            t('This is possible only when items are monitored.'),
-          '#element_validate' => array('feed_import_element_validate_updates_only'),
-        ),
         'reset_cache' => array(
           '#type' => 'textfield',
           '#title' => t('Reset entity static cache'),
@@ -688,12 +679,6 @@ function feed_import_feed_import_processor_info() {
           '#description' => t('This is usefull if you try to import multiple feeds that declare same dynamic function names.') . ' ' .
                             t('However, it is recommended to put those functions in a php filter file rather than creating them dynamically.'),
           '#default_value' => FALSE,
-        ),
-        'uniq_callback' => array(
-          '#type' => 'textfield',
-          '#title' => t('Unique id alter callback'),
-          '#description' => t('Function to call before the hash is computed using unique id value.'),
-          '#default_value' => '',
         ),
         'after_save' => array(
           '#type' => 'textfield',
@@ -892,15 +877,6 @@ function feed_import_get_class_settings($setting) {
  */
 function _feed_import_lines($str) {
   return preg_split('/\r?\n/', $str);
-}
-
-/**
- * Checks if an elmeent is not empty.
- */
-function feed_import_element_validate_not_empty($element, &$form_state) {
-  if (!strlen($element['#value'])) {
-    form_error($element, t('%name must not be empty.', array('%name' => $element['#title'])));
-  }
 }
 
 /**
@@ -2252,7 +2228,7 @@ function feed_import_generate_path_item($pos, array $values, $collapsed = FALSE)
     ),
     '#default_value' => $values['default_action'],
     '#title' => t('Action when filtered result is empty'),
-    '#description' => t('If the filtered result is empty you can choose what action to take next.'),
+    '#description' => t('If the filter is empty you can choose what action to take next.'),
     '#id' => 'default_action_' . $pos,
   );
   $container['default_value'] = array(
@@ -2264,13 +2240,13 @@ function feed_import_generate_path_item($pos, array $values, $collapsed = FALSE)
     '#prefix' => '<div style="display: none;" rel="default_action_' . $pos . '">',
     '#suffix' => '</div>',
   );
-  $options = module_invoke_all('feed_import_field_merge_classes');
-  foreach ($options as &$option) {
-    $option = $option['title'];
-  }
   $container['update_mode'] = array(
     '#type' => 'select',
-    '#options' => $options,
+    '#options' => array(
+      FeedImportProcessor::UPDATE_COMBINE => t('Merge field - no duplicates'),
+      FeedImportProcessor::UPDATE_MERGE => t('Merge field - allow duplicates'),
+      FeedImportProcessor::UPDATE_OVERWRITE => t('Overwrite field'),
+    ),
     '#default_value' => $values['update_mode'],
     '#title' => t('Field update mode'),
     '#description' => t('How to update existing entities.'),
@@ -2787,17 +2763,6 @@ function feed_import_element_validate_xmldec($element, &$form_state, $form) {
 function feed_import_element_validate_not_numeric($element, &$form_state, $form) {
   if (is_numeric($element['#value'])) {
     form_error($element, t('%title must not be numeric!', array(
-      '%title' => $element['#title'],
-    )));
-  }
-}
-
-/**
- * Validates Feed Import processor updates only field.
- */
-function feed_import_element_validate_updates_only($element, &$form_state, $form) {
-  if ($element['#value'] && $form_state['values']['options']['skip_imported']) {
-    form_error($element, t('"%title" must not be used if "Skip already imported items" is also used. Doing so, the import makes no sense!', array(
       '%title' => $element['#title'],
     )));
   }

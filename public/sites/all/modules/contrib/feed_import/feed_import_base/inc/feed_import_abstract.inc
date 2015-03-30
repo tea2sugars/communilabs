@@ -206,8 +206,6 @@ abstract class FeedImportDomXPathReader extends FeedImportReader {
  */
 abstract class FeedImportVectorReader extends FeedImportReader {
 
-  const WILDCARD = '*';
-  
   /**
    * {@inheritdoc}
    */
@@ -216,14 +214,8 @@ abstract class FeedImportVectorReader extends FeedImportReader {
     $count = 0;
     foreach ($path as $p) {
       if (($p = $this->submap($vector, $p)) !== NULL) {
-        if ($p instanceof ArrayObject) {
-          $ret = array_merge($ret, $p->getArrayCopy());
-          $count += count($p);
-        }
-        else {
-          $ret[] = $p;
-          $count++;
-        }
+        $ret[] = $p;
+        $count++;
       }
     }
     return $count == 0 ? NULL : ($count == 1 ? $ret[0] : $ret);
@@ -236,37 +228,13 @@ abstract class FeedImportVectorReader extends FeedImportReader {
    *    The vector to search
    * @param array $path
    *    Path parts
-   * @param int $index
-   *    Path index
    *
    * @return mixed
    *    Found value or NULL
    */
-  public function submap(&$vector, &$path, $index = 0) {
-    while (isset($path[$index])) {
-      $p = &$path[$index++];
-      if ($p == static::WILDCARD) {
-        if (is_scalar($vector)) {
-          return NULL;
-        }
-        $result = new ArrayObject();
-        foreach ($vector as &$value) {
-          if (($res = $this->submap($value, $path, $index)) !== NULL) {
-            if ($res instanceof ArrayObject) {
-              foreach ($res as &$r) {
-                $result[] = $r;
-              }
-              unset($r);
-            }
-            else {
-              $result[] = $res;
-            }
-          }
-          unset($res);
-        }
-        return $result ? $result : NULL;
-      }
-      elseif (is_array($vector)) {
+  public function submap(&$vector, &$path) {
+    foreach ($path as &$p) {
+      if (is_array($vector)) {
         if (isset($vector[$p])) {
           $vector = &$vector[$p];
           continue;
@@ -495,39 +463,4 @@ abstract class FeedImportHashManager extends FeedImportConfigurable implements F
    */
   abstract public function hash(&$uniq);
 
-}
-
-/**
- * Abstract class that helps merging fields on update.
- */
-abstract class FeedImportMergeField {
-  
-  /**
-   * Remove field if is missing from source.
-   *
-   * @return bool
-   *    True to overwrite
-   */
-  public function overwriteEmpty() {
-    return FALSE;
-  }
-  
-  /**
-   * Merge the new and current field values.
-   * The merge should be set in $current ref. variable
-   *
-   * @param array $current
-   *    Current field values
-   * @param array $new
-   *    New field values
-   * @param array $field
-   *    Field info
-   *      cardinality - field cardinality
-   *      compare - compare function for field value
-   *
-   * @return bool
-   *    True if $current was changed
-   */
-  abstract public function merge(array &$current, array &$new, array &$field);
-  
 }
